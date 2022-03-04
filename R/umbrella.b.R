@@ -45,10 +45,10 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             
             
             ## TRY 4: Lighter function - Works perfectly but I do not understand why (why no error due to inclusion of vars options?)
-            # facs <- self$options$vars
-            # for (fac in facs)
-            #     df[[fac]] <- as.character(df[[fac]])
-            # 
+            facs <- self$options$vars
+            for (fac in facs)
+                df[[fac]] <- as.character(df[[fac]])
+
             results <- esb.test(df, measure = "RR")
             table <- self$results$umbrellatable
             table$setRow(rowNo = 1,
