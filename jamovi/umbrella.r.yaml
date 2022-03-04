@@ -1,0 +1,19 @@
+---
+name:  umbrella
+title: Results of your umbrella review
+jrs:   '1.1'
+
+items:
+
+    - name:  umbrellatable
+      title:  a try to build a table
+      type: Table
+      rows:  1
+      columns:
+        - name: col1
+          type: text
+        - name: col2
+          type: text
+        - name: col3
+          type: text
+...

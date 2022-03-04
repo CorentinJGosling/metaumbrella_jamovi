@@ -1,0 +1,63 @@
+---
+name:  umbrella
+title: Results of your umbrella review
+menuGroup: metaumbrella_jmv
+version: '1.0.0'
+jas: '1.2'
+
+options:
+    - name: data
+      type: Data
+      
+    # - name: vars
+    #   title: List of variables
+    #   type: Variables
+
+    - name: method.var
+      title: Estimator for the RE model
+      type: List
+      options:
+        - title: REML
+          name:  REML
+        - title: DL
+          name:  DL
+        - title: hksj
+          name:  hksj
+        - title: ML
+          name:  ML
+        - title: PM
+          name:  PM
+      default: REML
+      
+    - name: true_effect
+      title: Best approximation of the 'true' effect
+      type: List
+      options:
+        - title: largest
+          name:  largest
+        - title: pooled
+          name:  pooled
+      default: largest
+
+    - name: mult.level
+      title: Check the box if at least one factor has a multilevel structure
+      type: Bool
+      default: false
+      
+    - name: r
+      type: Number
+      title: Strength of the within-study correlation between the outcomes
+      min: 0
+      max: 1
+      default: 0.5
+      
+    # this is used for verification/debugging purposes, not needed in the final version of the module
+    # - name: depa
+    #   title: Dependent Variable
+    #   type: Variable
+    #   # this is used for verification/debugging purposes, not needed in the final version of the module
+    # - name: depb
+    #   title: Grouping Variable
+    #   type: Variable
+
+...
