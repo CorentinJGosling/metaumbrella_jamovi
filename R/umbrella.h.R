@@ -6,7 +6,6 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     inherit = jmvcore::Options,
     public = list(
         initialize = function(
-            vars = NULL,
             method.var = "REML",
             true_effect = "largest",
             mult.level = FALSE,
@@ -18,9 +17,6 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 requiresData=TRUE,
                 ...)
 
-            private$..vars <- jmvcore::OptionVariables$new(
-                "vars",
-                vars)
             private$..method.var <- jmvcore::OptionList$new(
                 "method.var",
                 method.var,
@@ -49,20 +45,17 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 max=1,
                 default=0.5)
 
-            self$.addOption(private$..vars)
             self$.addOption(private$..method.var)
             self$.addOption(private$..true_effect)
             self$.addOption(private$..mult.level)
             self$.addOption(private$..r)
         }),
     active = list(
-        vars = function() private$..vars$value,
         method.var = function() private$..method.var$value,
         true_effect = function() private$..true_effect$value,
         mult.level = function() private$..mult.level$value,
         r = function() private$..r$value),
     private = list(
-        ..vars = NA,
         ..method.var = NA,
         ..true_effect = NA,
         ..mult.level = NA,
@@ -121,7 +114,6 @@ umbrellaBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'
 #' 
 #' @param data .
-#' @param vars .
 #' @param method.var .
 #' @param true_effect .
 #' @param mult.level .
@@ -140,7 +132,6 @@ umbrellaBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' @export
 umbrella <- function(
     data,
-    vars,
     method.var = "REML",
     true_effect = "largest",
     mult.level = FALSE,
@@ -149,15 +140,12 @@ umbrella <- function(
     if ( ! requireNamespace("jmvcore", quietly=TRUE))
         stop("umbrella requires jmvcore to be installed (restart may be required)")
 
-    if ( ! missing(vars)) vars <- jmvcore::resolveQuo(jmvcore::enquo(vars))
     if (missing(data))
         data <- jmvcore::marshalData(
-            parent.frame(),
-            `if`( ! missing(vars), vars, NULL))
+            parent.frame())
 
 
     options <- umbrellaOptions$new(
-        vars = vars,
         method.var = method.var,
         true_effect = true_effect,
         mult.level = mult.level,
