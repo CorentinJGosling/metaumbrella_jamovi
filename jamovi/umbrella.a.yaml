@@ -9,9 +9,9 @@ options:
     - name: data
       type: Data
       
-    # - name: vars
-    #   title: List of variables
-    #   type: Variables
+    - name: vars
+      title: List of variables
+      type: Variables
 
     - name: method.var
       title: Estimator for the RE model
