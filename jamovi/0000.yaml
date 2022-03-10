@@ -12,11 +12,11 @@ description: >-
   More about what it does (maybe more than one line) Use four spaces when
   indenting paragraphs within the Description.
 analyses:
-  - title: Results of your umbrella review
+  - title: Umbrella review
     name: umbrella
     ns: metaumbrella
     menuGroup: metaumbrella_jmv
-    menuTitle: Results of your umbrella review
+    menuTitle: Umbrella review
 usesNative: true
 minApp: 1.0.8
 

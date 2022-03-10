@@ -189,35 +189,35 @@
 
       # 1. total_n
       if (any(!is.na(data_class$total_n))) {
-        if(any(data_class$total_n[which(!is.na(data_class$total_n))] < 0)) {
+        if(any(data_class$total_n[which(!is.na(data_class$total_n))] < 0 & data_class$n_studies[which(!is.na(data_class$n_studies))] != -9999)) {
           stop("The 'total_n' inputs should be positive numbers. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
       }
 
       # 2. n_studies
       if (any(!is.na(data_class$n_studies))) {
-        if(any(data_class$n_studies[which(!is.na(data_class$n_studies))] < 0)) {
+        if(any(data_class$n_studies[which(!is.na(data_class$n_studies))] < 0 & data_class$n_studies[which(!is.na(data_class$n_studies))] != -9999)) {
           stop("The 'n_studies' inputs should be positive numbers. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
       }
 
       # 3. total_n
       if (any(!is.na(data_class$total_n))) {
-        if(any(data_class$total_n[which(!is.na(data_class$total_n))] < 0)) {
+        if(any(data_class$total_n[which(!is.na(data_class$total_n))] < 0 & data_class$total_n[which(!is.na(data_class$total_n))] != -9999)) {
           stop("The 'total_n' inputs should be positive numbers. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
       }
 
       # 4. n_cases
       if (any(!is.na(data_class$n_cases))) {
-        if(any(data_class$n_cases[which(!is.na(data_class$n_cases))] < 0)) {
+        if(any(data_class$n_cases[which(!is.na(data_class$n_cases))] < 0 & data_class$n_studies[which(!is.na(data_class$n_studies))] != -9999)) {
           stop("The 'n_cases' inputs should be positive numbers. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
       }
 
       # 5. p_value
       if (any(!is.na(data_class$p_value))) {
-        if(any(data_class$p_value[which(!is.na(data_class$p_value))] < 0) |
+        if(any(data_class$p_value[which(!is.na(data_class$p_value))] < 0 & data_class$n_studies[which(!is.na(data_class$n_studies))] != -9999) |
            any(data_class$p_value[which(!is.na(data_class$p_value))] > 1)) {
           stop("The 'p_value' inputs should be numbers within the [0, 1] range. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
@@ -225,7 +225,7 @@
 
       # 6. I2
       if (any(!is.na(data_class$I2))) {
-        if(any(data_class$I2[which(!is.na(data_class$I2))] < 0) |
+        if(any(data_class$I2[which(!is.na(data_class$I2))] < 0 & data_class$n_studies[which(!is.na(data_class$n_studies))] != -9999) |
            any(data_class$I2[which(!is.na(data_class$I2))] > 100)) {
           stop("The 'I2' inputs should be numbers within the [0, 100] range. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
@@ -240,7 +240,7 @@
 
       # 8. rob
       if (any(!is.na(data_class$rob))) {
-        if(any(data_class$rob[which(!is.na(data_class$rob))] < 0) |
+        if(any(data_class$rob[which(!is.na(data_class$rob))] < 0 & data_class$rob[which(!is.na(data_class$rob))] != -9999) |
            any(data_class$rob[which(!is.na(data_class$rob))] > 100)) {
           stop("The 'rob' inputs should be numbers within the [0, 100] range. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
@@ -248,14 +248,14 @@
 
       # 9. amstar
       if (any(!is.na(data_class$amstar))) {
-        if(any(data_class$amstar[which(!is.na(data_class$amstar))] < 0)) {
+        if(any(data_class$amstar[which(!is.na(data_class$amstar))] < 0 & data_class$amstar[which(!is.na(data_class$amstar))] != -9999)) {
           stop("The 'amstar' inputs should be positive numbers. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
       }
 
       # 8. egger_p
       if (any(!is.na(data_class$egger_p))) {
-        if(any(data_class$egger_p[which(!is.na(data_class$egger_p))] < 0) |
+        if(any(data_class$egger_p[which(!is.na(data_class$egger_p))] < 0 & data_class$egger_p[which(!is.na(data_class$egger_p))] != -9999) |
            any(data_class$egger_p[which(!is.na(data_class$egger_p))] > 1)) {
           stop("The 'egger_p' inputs should be p-values and shoud thus be numbers within the [0, 1] range. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
@@ -263,14 +263,14 @@
 
       # 10. esb_p.criteria
       if (any(!is.na(data_class$esb_p))) {
-        if(any(data_class$esb_p[which(!is.na(data_class$esb_p))] < 0) |
+        if(any(data_class$esb_p[which(!is.na(data_class$esb_p))] < 0 & data_class$esb_p[which(!is.na(data_class$esb_p))] != -9999) |
            any(data_class$esb_p[which(!is.na(data_class$esb_p))] > 1)) {
           stop("The 'esb_p' inputs should be p-values and shoud thus be numbers within the [0, 1] range. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
       }
       # 11. JK
       if (any(!is.na(data_class$JK_p))) {
-        if(any(data_class$JK_p[which(!is.na(data_class$JK_p))] < 0) |
+        if(any(data_class$JK_p[which(!is.na(data_class$JK_p))] < 0 & data_class$JK_p[which(!is.na(data_class$JK_p))] != -9999) |
            any(data_class$JK_p[which(!is.na(data_class$JK_p))] > 1)) {
           stop("The 'JK_p' inputs should be p-values and shoud thus be numbers within the [0, 1] range. See manual for more details on the formatting of the 'Personalized' criteria.")
         }

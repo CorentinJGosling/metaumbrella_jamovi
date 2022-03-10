@@ -1,19 +1,88 @@
 ---
 name:  umbrella
-title: Results of your umbrella review
+title: 'umbrella'
 jrs:   '1.1'
 
 items:
-
-    - name:  umbrellatable
-      title:  a try to build a table
+    - name:  strattable
+      title:  Summary results
       type: Table
       rows:  1
       columns:
-        - name: col1
+        - name: Factor
           type: text
-        - name: col2
+        - name: Criteria
           type: text
-        - name: col3
+        - name: Class
           type: text
+        - name: n_studies
+          type: text
+        - name: total_n
+          type: text
+        - name: n_cases
+          type: text
+        - name: n_controls
+          type: text
+
+    - name:  metatable
+      title:  Core meta-analytic results
+      type: Table
+      rows:  1
+      columns:
+        - name: Factor
+          type: text
+        - name: measure
+          type: text
+        - name: value
+          type: text
+        - name: value_CI
+          type: text
+        - name: eG
+          type: text
+        - name: eG_CI
+          type: text
+        - name: eOR
+          type: text
+        - name: eOR_CI
+          type: text
+        - name: p_value
+          type: text
+          
+    - name:  addtable
+      title:  Additional results
+      type: Table
+      rows:  1
+      columns:
+        - name: Factor
+          type: text
+        - name: I2
+          type: text
+        - name: PI_eG
+          type: text
+        - name: PI_eOR
+          type: text
+        - name: egger_p
+          type: text
+        - name: ESB_p
+          type: text
+        - name: power_med
+          type: text
+        - name: JK_p
+          type: text
+        - name: largest_CI_eG
+          type: text
+        - name: largest_CI_eOR
+          type: text
+        - name: rob
+          type: text
+        - name: amstar
+          type: text
+          
+    - name: plot
+      title: Descriptives Plot
+      type: Image
+      width:  600
+      height: 500
+      renderFun: .plot
+
 ...

@@ -1,9 +1,10 @@
 ---
 name:  umbrella
-title: Results of your umbrella review
+title: 'Umbrella review'
 menuGroup: metaumbrella_jmv
 version: '1.0.0'
 jas: '1.2'
+export: false
 
 options:
     - name: data
@@ -13,8 +14,22 @@ options:
       title: List of variables
       type: Variables
 
+    - name: criteria
+      title: Criteria used for the stratification of evidence
+      type: List
+      options:
+        - title: Ioannidis
+          name:  Ioannidis
+        - title: GRADE
+          name:  GRADE
+        - title: Personalized
+          name:  Personalized
+        - title: None 
+          name:  None
+      default: Ioannidis
+
     - name: method.var
-      title: Estimator for the RE model
+      title: Estimator for the between-study variance
       type: List
       options:
         - title: REML
@@ -43,21 +58,283 @@ options:
       title: Check the box if at least one factor has a multilevel structure
       type: Bool
       default: false
-      
+
     - name: r
       type: Number
-      title: Strength of the within-study correlation between the outcomes
+      title: Indicate the strength of the within-study correlation between the outcomes
       min: 0
       max: 1
       default: 0.5
-      
-    # this is used for verification/debugging purposes, not needed in the final version of the module
-    # - name: depa
-    #   title: Dependent Variable
-    #   type: Variable
-    #   # this is used for verification/debugging purposes, not needed in the final version of the module
-    # - name: depb
-    #   title: Grouping Variable
-    #   type: Variable
 
+    - name: n_studies_1
+      type: Number
+      title: "Class I cut-off:"
+      min: -9999
+      default: -9999
+    - name: n_studies_2
+      type: Number
+      title: "Class II cut-off:"
+      min: -9999
+      default: -9999
+    - name: n_studies_3
+      type: Number
+      title: "Class III cut-off:"
+      min: -9999
+      default: -9999
+    - name: n_studies_4
+      type: Number
+      title: "Class IV cut-off:"
+      min: -9999
+      default: -9999
+
+    - name: total_n_1
+      type: Number
+      title: "Class I cut-off:"
+      min: -9999
+      default: -9999
+    - name: total_n_2
+      type: Number
+      title: "Class II cut-off:"
+      min: -9999
+      default: -9999
+    - name: total_n_3
+      type: Number
+      title: "Class III cut-off:"
+      min: -9999
+      default: -9999
+    - name: total_n_4
+      type: Number
+      title: "Class IV cut-off:"
+      min: -9999
+      default: -9999
+
+    - name: n_cases_1
+      type: Number
+      title: "Class I cut-off:"
+      min: -9999
+      default: -9999
+    - name: n_cases_2
+      type: Number
+      title: "Class II cut-off:"
+      min: -9999
+      default: -9999
+    - name: n_cases_3
+      type: Number
+      title: "Class III cut-off:"
+      min: -9999
+      default: -9999
+    - name: n_cases_4
+      type: Number
+      title: "Class IV cut-off:"
+      min: -9999
+      default: -9999
+      
+    - name: p_value_1
+      type: Number
+      title: "Class I cut-off:"
+      min: -9999
+      default: -9999
+    - name: p_value_2
+      type: Number
+      title: "Class II cut-off:"
+      min: -9999
+      default: -9999
+    - name: p_value_3
+      type: Number
+      title: "Class III cut-off:"
+      min: -9999
+      default: -9999
+    - name: p_value_4
+      type: Number
+      title: "Class IV cut-off:"
+      min: -9999
+      default: -9999
+      
+    - name: I2_1
+      type: Number
+      title: "Class I cut-off:"
+      min: -9999
+      default: -9999
+    - name: I2_2
+      type: Number
+      title: "Class II cut-off:"
+      min: -9999
+      default: -9999
+    - name: I2_3
+      type: Number
+      title: "Class III cut-off:"
+      min: -9999
+      default: -9999
+    - name: I2_4
+      type: Number
+      title: "Class IV cut-off:"
+      min: -9999
+      default: -9999
+
+    - name: imprecision_1
+      type: Number
+      title: "Class I cut-off:"
+      min: -9999
+      default: -9999
+    - name: imprecision_2
+      type: Number
+      title: "Class II cut-off:"
+      min: -9999
+      default: -9999
+    - name: imprecision_3
+      type: Number
+      title: "Class III cut-off:"
+      min: -9999
+      default: -9999
+    - name: imprecision_4
+      type: Number
+      title: "Class IV cut-off:"
+      min: -9999
+      default: -9999
+
+    - name: rob_1
+      type: Number
+      title: "Class I cut-off:"
+      min: -9999
+      default: -9999
+    - name: rob_2
+      type: Number
+      title: "Class II cut-off:"
+      min: -9999
+      default: -9999
+    - name: rob_3
+      type: Number
+      title: "Class III cut-off:"
+      min: -9999
+      default: -9999
+    - name: rob_4
+      type: Number
+      title: "Class IV cut-off:"
+      min: -9999
+      default: -9999
+
+    - name: amstar_1
+      type: Number
+      title: "Class I cut-off:"
+      min: -9999
+      default: -9999
+    - name: amstar_2
+      type: Number
+      title: "Class II cut-off:"
+      min: -9999
+      default: -9999
+    - name: amstar_3
+      type: Number
+      title: "Class III cut-off:"
+      min: -9999
+      default: -9999
+    - name: amstar_4
+      type: Number
+      title: "Class IV cut-off:"
+      min: -9999
+      default: -9999
+
+    - name: egger_p_1
+      type: Number
+      title: "Class I cut-off:"
+      min: -9999
+      default: -9999
+    - name: egger_p_2
+      type: Number
+      title: "Class II cut-off:"
+      min: -9999
+      default: -9999
+    - name: egger_p_3
+      type: Number
+      title: "Class III cut-off:"
+      min: -9999
+      default: -9999
+    - name: egger_p_4
+      type: Number
+      title: "Class IV cut-off:"
+      min: -9999
+      default: -9999
+
+    - name: esb_p_1
+      type: Number
+      title: "Class I cut-off:"
+      min: -9999
+      default: -9999
+    - name: esb_p_2
+      type: Number
+      title: "Class II cut-off:"
+      min: -9999
+      default: -9999
+    - name: esb_p_3
+      type: Number
+      title: "Class III cut-off:"
+      min: -9999
+      default: -9999
+    - name: esb_p_4
+      type: Number
+      title: "Class IV cut-off:"
+      min: -9999
+      default: -9999
+
+    - name: JK_p_1
+      type: Number
+      title: "Class I cut-off:"
+      min: -9999
+      default: -9999
+    - name: JK_p_2
+      type: Number
+      title: "Class II cut-off:"
+      min: -9999
+      default: -9999
+    - name: JK_p_3
+      type: Number
+      title: "Class III cut-off:"
+      min: -9999
+      default: -9999
+    - name: JK_p_4
+      type: Number
+      title: "Class IV cut-off:"
+      min: -9999
+      default: -9999
+
+    - name: pi_1
+      type: Bool
+      default: false
+      title: "If ticked, prevents Class I to be reached when the 95% interval includes 0"
+    - name: pi_2
+      type: Bool
+      default: false
+      title: "If ticked, prevents Class II to be reached when the 95% interval includes 0"
+    - name: pi_3
+      type: Bool
+      default: false
+      title: "If ticked, prevents Class III to be reached when the 95% interval includes 0"
+    - name: pi_4
+      type: Bool
+      default: false
+      title: "If ticked, prevents Class IV to be reached when the 95% interval includes 0"
+
+    - name: largest_CI_1
+      type: Bool
+      default: false
+      title: "If ticked, prevents Class I to be reached when the p-value of the largest study is >= .05"
+    - name: largest_CI_2
+      type: Bool
+      default: false
+      title: "If ticked, prevents Class II to be reached when the p-value of the largest study is >= .05"
+    - name: largest_CI_3
+      type: Bool
+      default: false
+      title: "If ticked, prevents Class III to be reached when the p-value of the largest study is >= .05"
+    - name: largest_CI_4
+      type: Bool
+      default: false
+      title: "If ticked, prevents Class IV to be reached when p-value of the largest study is >= .05"
+    # - name: plota
+    #   title: Forest plot
+    #   type: plot
+    #   width:  400
+    #   height: 300
+    #   renderFun: .plot
+    
 ...

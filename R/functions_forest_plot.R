@@ -169,7 +169,7 @@ forest.umbrella <- function (x,
                              x_axis_adj = 0,
                              ...) {
 
-  if (!inherits(x, "umbrella")) { stop("The 'x' argument must be an 'umbrella' object") }
+  if (!inherits(x, "umbrella")) { stop("No dataset detected. Load (or reload) your dataset and drag-and-drop appropriate column names to the 'List of variables' selector.") }
 
   if (!measure %in% c("SMD", "eG", "OR", "eOR")) {
     stop("The 'measure' argument must be either 'eOR' or 'eG'")
