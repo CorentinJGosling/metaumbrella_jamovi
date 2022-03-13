@@ -1,6 +1,6 @@
 ---
 name:  umbrella
-title: 'umbrella'
+title: 'Results of the umbrella review'
 jrs:   '1.1'
 
 items:
@@ -79,10 +79,10 @@ items:
           type: text
           
     - name: plot
-      title: Descriptives Plot
+      title: Forest Plot
       type: Image
-      width:  600
-      height: 500
+      width:  1000
+      height: 1000
       renderFun: .plot
 
 ...

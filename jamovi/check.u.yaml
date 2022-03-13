@@ -1,0 +1,16 @@
+title: Check dataset formatting
+name: check
+jus: '3.0'
+stage: 0
+compilerMode: aggressive
+children:
+  - type: VariableSupplier
+    persistentItems: false
+    stretchFactor: 1
+    children:
+      - type: TargetLayoutBox
+        label: List of variables
+        children:
+          - type: VariablesListBox
+            name: vars
+            isTarget: true

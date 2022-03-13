@@ -55,7 +55,7 @@ options:
       default: largest
 
     - name: mult.level
-      title: Check the box if at least one factor has a multilevel structure
+      title: Check the box if at least one factor has a multivariate structure
       type: Bool
       default: false
 
@@ -330,11 +330,67 @@ options:
       type: Bool
       default: false
       title: "If ticked, prevents Class IV to be reached when p-value of the largest study is >= .05"
-    # - name: plota
-    #   title: Forest plot
-    #   type: plot
-    #   width:  400
-    #   height: 300
-    #   renderFun: .plot
-    
+    - name: measure_forest
+      title: Meeasure used
+      type: List
+      options:
+        - title: eG
+          name:  eG
+        - title: eOR
+          name:  eOR
+      default: eG
+    - name: class_forest
+      title: Select lowest class displayed in the plot
+      type: List
+      options:
+        - title: No restriction
+          name:  no_rest
+        - title: Class I
+          name:  I
+        - title: Class II
+          name:  II
+        - title: Class III
+          name:  III
+        - title: Class IV
+          name:  IV
+        - title: High
+          name:  High
+        - title: Moderate
+          name:  Moderate
+        - title: Low
+          name:  Low
+      default: no_rest
+    - name: title_forest
+      title: Title of the plot
+      type: String
+    - name: title_xaxis
+      title: Title of the x-axis
+      type: String
+    - name: cex
+      type: Number
+      title: Police size
+      min: 0
+      default: 1
+    - name: cex_dot
+      type: Number
+      title: Dot size
+      min: 0
+      default: 1
+    - name: x_lim_adj
+      type: Number
+      title: Width 
+      default: 0
+    - name: y_lim_adj
+      type: Number
+      title: Height
+      default: 0
+    - name: max_x
+      type: Number
+      title: x-axis limits
+      default: -9999
+    - name: x_axis_adj
+      type: Number
+      title: Position x-axis
+      default: 0
+
 ...

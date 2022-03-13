@@ -1,6 +1,6 @@
 Package: metaumbrella
 Type: Package
-Title: Umbrella Review Package for Jamovi
+Title: Umbrella Review Module for Jamovi
 Version: 0.0.0
 Author: Corentin J Gosling [aut, cre], Aleix Solanes [aut], Paolo Fusar-Poli [aut], Joaquim Radua [aut]
 Maintainer: Corentin J Gosling <cgosling@parisnanterre.fr>
@@ -9,4 +9,12 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: jmvcore (>= 0.8.5), R6, meta, powerSurvEpi
+references:
+  metaumbrella:
+    type: software
+    author: 'Gosling CJ, Solanes F, Fusar-Poli P and Radua J'
+    year: 2022
+    title: 'metaummbrella: metaumbrella: An R Package for Conducting Umbrella Reviews'
+    publisher: '[R package]. Retrieved from https://cran.r-project.org/package=metaumbrella'
+    url: 'https://cran.r-project.org/package=metaumbrella'
 

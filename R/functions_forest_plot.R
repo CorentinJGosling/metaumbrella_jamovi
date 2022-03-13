@@ -169,7 +169,7 @@ forest.umbrella <- function (x,
                              x_axis_adj = 0,
                              ...) {
 
-  if (!inherits(x, "umbrella")) { stop("No dataset detected. Load (or reload) your dataset and drag-and-drop appropriate column names to the 'List of variables' selector.") }
+  # if (!inherits(x, "umbrella")) { stop("No dataset detected. Load (or reload) your dataset and drag-and-drop appropriate column names to the 'List of variables' selector.") }
 
   if (!measure %in% c("SMD", "eG", "OR", "eOR")) {
     stop("The 'measure' argument must be either 'eOR' or 'eG'")
@@ -299,19 +299,27 @@ forest.umbrella <- function (x,
   #name of the factors to plot
   labels <- rownames(y)
   # size of points
+  # if (is.na(fix_size_dots)) {
+  #   lwd <- 1 / (y$ci_up - y$ci_lo);
+  #   if(length(lwd) > 1) {
+  #     lwd <- sqrt(30 + 150 * (lwd - min(lwd)) / (max(lwd) - min(lwd))) * cex_dots
+  #   } else {
+  #     if (lwd < 10) {
+  #       lwd <- 10
+  #     }
+  #   }
+  #   if (log_cex_dots) { lwd <- log(lwd) * 4 }
+  # } else {
+  #   lwd <- rep(fix_size_dots, nrow(y))
+  # }
   if (is.na(fix_size_dots)) {
     lwd <- 1 / (y$ci_up - y$ci_lo);
-    if(length(lwd) > 1) {
-      lwd <- sqrt(30 + 150 * (lwd - min(lwd)) / (max(lwd) - min(lwd))) * cex_dots
-    } else {
-      if (lwd < 10) {
-        lwd <- 10
-      }
-    }
-    if (log_cex_dots) { lwd <- log(lwd) * 4 }
+    lwd <- ifelse(lwd > 3, 3, lwd) * cex_dots
+    if (log_cex_dots) { lwd <- log(lwd) + 1 }
   } else {
     lwd <- rep(fix_size_dots, nrow(y))
   }
+  
   if (measure == "eG") {
     value.text <- paste0(gsub(" ", "", format(round(y$y, 2), nsmall = 2)), " [",
                          gsub(" ", "", format(round(y$ci_lo, 2), nsmall = 2)), ", ",
@@ -346,8 +354,9 @@ forest.umbrella <- function (x,
               max(strwidth(value.text, units = "inches")) + 2.5 - x_lim_adj);
   }
   ylim <- c(-2.2 + y_lim_adj, n.stud + n.classes + 2 - y_lim_adj);
-  plot.window(xlim = xlim, ylim = ylim, ...);
-
+  # plot.window(xlim = xlim, ylim = ylim, ...);
+  plot.window(xlim = xlim, ylim = ylim);
+  
   # Plot the axes:
   # y axis
   lines(x = c(0, 0), y = c(n.classes + n.stud + 0.5, 0), col = "#5D5D5D", lty = 1);
@@ -447,8 +456,12 @@ forest.umbrella <- function (x,
 
     # plot value
     if (y_i < max.value) {
-      lines(x = rep(y_i / max.value * 2, 2), y = rep(pos.y.value_i, 2) - pos_value_ylim_cor - ylim_correction_value,
-            lwd = lwd[i], col = col2_i);
+      # lines(x = rep(y_i / max.value * 2, 2), 
+      #       y = rep(pos.y.value_i, 2) - pos_value_ylim_cor - ylim_correction_value,
+      #       lwd = lwd[i], col = col2_i);
+      points(x = y_i / max.value * 2,
+             y = pos.y.value_i - pos_value_ylim_cor - ylim_correction_value, 
+             cex = lwd[i], col = col2_i, pch = 22, bg = col2_i)
     }
 
     if (ci_lo_i < max.value) {

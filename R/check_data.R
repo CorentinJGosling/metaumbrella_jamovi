@@ -189,10 +189,10 @@
       # check the presence of non-numeric characters in numeric columns
       if (any(!grepl('^[0-9]|-', na.omit(x[, idx])))) {
         not_num <- which(!grepl('^[0-9]|-', na.omit(x[, idx])))
-        status <- "ERROR"
+        # status <- "ERROR"
         error_msgs <- append(error_msgs, paste0("The dataframe contains non-numeric characters while this is expected. Please check inputs."))
         column_errors[not_num] = paste(column_errors[not_num], "Non-numeric characters in column '", paste(colnames(x)[idx], "'. //"))
-        column_type_errors[not_num] = "ERROR"
+        # column_type_errors[not_num] = "ERROR"
       }
 
       # convert numeric columns to numeric format

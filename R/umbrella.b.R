@@ -12,12 +12,14 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             for (fac in facs)
                 df[[fac]] <- as.character(df[[fac]])
             
+            df[df == "NA"] <- NA
             res <- umbrella(df, 
                             method.var = self$options$method.var,
                             true_effect = self$options$true_effect,
                             mult.level = self$options$mult.level,
                             r = self$options$r)
-            results <- summary(res)
+            
+            results <- summary(res, digits = 3)
             
             if (self$options$criteria != "None") {
                 evid <- add.evidence(res, criteria = self$options$criteria,
@@ -36,10 +38,6 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
                                          pi = ifelse(self$options$pi_1 == FALSE, NA_character_, "notnull"),
                                          largest_CI = ifelse(self$options$largest_CI_1 == FALSE, NA_character_, "notnull")
                                      ),
-                                     
-                                     # ,
-                                     # pi = ifelse(self$options$pi_1 != "notnull", NA_real_, self$options$pi_1),
-                                     # largest_CI = ifelse(self$options$largest_CI_1 != "notnull", NA_real_, self$options$largest_CI_1)
                                      class_II = c(
                                          n_studies = ifelse(self$options$n_studies_2 == -9999, NA_real_, self$options$n_studies_2),
                                          total_n = ifelse(self$options$total_n_2 == -9999, NA_real_, self$options$total_n_2),
@@ -55,9 +53,6 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
                                          pi = ifelse(self$options$pi_2 == FALSE, NA_character_, "notnull"),
                                          largest_CI = ifelse(self$options$largest_CI_2 == FALSE, NA_character_, "notnull")
                                      ),
-                
-                # pi = ifelse(self$options$pi_2 != "notnull", NA_real_, self$options$pi_2),
-                # largest_CI = ifelse(self$options$largest_CI_2 != "notnull", NA_real_, self$options$largest_CI_2
                                      class_III = c(
                                          n_studies = ifelse(self$options$n_studies_3 == -9999, NA_real_, self$options$n_studies_3),
                                          total_n = ifelse(self$options$total_n_3 == -9999, NA_real_, self$options$total_n_3),
@@ -73,9 +68,6 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
                                          pi = ifelse(self$options$pi_3 == FALSE, NA_character_, "notnull"),
                                          largest_CI = ifelse(self$options$largest_CI_3 == FALSE, NA_character_, "notnull")
                                      ),
-                # ,
-                # pi = ifelse(self$options$pi_3 != "notnull", NA_real_, self$options$pi_3),
-                # largest_CI = ifelse(self$options$largest_CI_3 != "notnull", NA_real_, self$options$largest_CI_3)
                                      class_IV = c(
                                          n_studies = ifelse(self$options$n_studies_4 == -9999, NA_real_, self$options$n_studies_4),
                                          total_n = ifelse(self$options$total_n_4 == -9999, NA_real_, self$options$total_n_4),
@@ -91,40 +83,39 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
                                          pi = ifelse(self$options$pi_4 == FALSE, NA_character_, "notnull"),
                                          largest_CI = ifelse(self$options$largest_CI_4 == FALSE, NA_character_, "notnull")
                                      )
-                # ,
-                # pi = ifelse(self$options$pi_4 != "notnull", NA_real_, self$options$pi_4),
-                # largest_CI = ifelse(self$options$largest_CI_4 != "notnull", NA_real_, self$options$largest_CI_4)
-                                     )
+                 )
                 
-                evidence <- summary(evid) 
+                evidence <- merge(summary(evid, digits = 3), results)
+                evidence <- evidence[order(evidence$Class), ]
             } else {
-                evid <- NULL
+                evid <- res
+                evidence <- results
             }
             # ====================================================================================== #
             table1 <- self$results$strattable
             
             table1$setRow(rowNo = 1,
                           values = list(
-                              Factor = results$Factor[1],
-                              Criteria = ifelse(is.null(evid), "N/A", evidence$Criteria[1]),
-                              Class = ifelse(is.null(evid), "N/A", as.character(evidence$Class[1])),
-                              n_studies = results$n_studies[1],
-                              total_n = results$total_n[1],
-                              n_cases = results$n_cases[1],
-                              n_controls = results$n_controls[1])
+                              Factor = evidence$Factor[1],
+                              Criteria = ifelse(self$options$criteria == "None", "N/A", evidence$Criteria[1]),
+                              Class = ifelse(self$options$criteria == "None", "N/A", as.character(evidence$Class[1])),
+                              n_studies = evidence$n_studies[1],
+                              total_n = evidence$total_n[1],
+                              n_cases = evidence$n_cases[1],
+                              n_controls = evidence$n_controls[1])
             )           
             
-            if (length(unique(results$Factor)) > 1) {
-                for (i in 2:(length(unique(results$Factor)))) {
+            if (length(unique(evidence$Factor)) > 1) {
+                for (i in 2:(length(unique(evidence$Factor)))) {
                     table1$addRow(rowKey = i,
                                  values = list(
-                                     Factor = results$Factor[i],
-                                     Criteria = ifelse(is.null(evid), "N/A", evidence$Criteria[i]),
-                                     Class = ifelse(is.null(evid), "N/A", as.character(evidence$Class[i])),
-                                     n_studies = results$n_studies[i],
-                                     total_n = results$total_n[i],
-                                     n_cases = results$n_cases[i],
-                                     n_controls = results$n_controls[i])
+                                     Factor = evidence$Factor[i],
+                                     Criteria = ifelse(self$options$criteria == "None", "N/A", evidence$Criteria[i]),
+                                     Class = ifelse(self$options$criteria == "None", "N/A", as.character(evidence$Class[i])),
+                                     n_studies = evidence$n_studies[i],
+                                     total_n = evidence$total_n[i],
+                                     n_cases = evidence$n_cases[i],
+                                     n_controls = evidence$n_controls[i])
                     )
                 }
             }
@@ -135,30 +126,30 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             
             table2$setRow(rowNo = 1,
                          values = list(
-                             Factor = results$Factor[1],
-                             measure = results$measure[1],
-                             value = results$value[1],
-                             value_CI = results$value_CI[1],
-                             eG = results$eG[1],
-                             eG_CI = results$eG_CI[1],
-                             eOR = results$eOR[1],
-                             eOR_CI = results$eOR_CI[1],
-                             p_value = results$p_value[1])
+                             Factor = evidence$Factor[1],
+                             measure = evidence$measure[1],
+                             value = evidence$value[1],
+                             value_CI = evidence$value_CI[1],
+                             eG = evidence$eG[1],
+                             eG_CI = evidence$eG_CI[1],
+                             eOR = evidence$eOR[1],
+                             eOR_CI = evidence$eOR_CI[1],
+                             p_value = evidence$p_value[1])
             )
             
-            if (length(unique(results$Factor)) > 1) {
-                for (i in 2:(length(unique(results$Factor)))) {
+            if (length(unique(evidence$Factor)) > 1) {
+                for (i in 2:(length(unique(evidence$Factor)))) {
                     table2$addRow(rowKey = i,
                                  values = list(
-                                     Factor = results$Factor[i],
-                                     measure = results$measure[i],
-                                     value = results$value[i],
-                                     value_CI = results$value_CI[i],
-                                     eG = results$eG[i],
-                                     eG_CI = results$eG_CI[i],
-                                     eOR = results$eOR[i],
-                                     eOR_CI = results$eOR_CI[i],
-                                     p_value = results$p_value[i])
+                                     Factor = evidence$Factor[i],
+                                     measure = evidence$measure[i],
+                                     value = evidence$value[i],
+                                     value_CI = evidence$value_CI[i],
+                                     eG = evidence$eG[i],
+                                     eG_CI = evidence$eG_CI[i],
+                                     eOR = evidence$eOR[i],
+                                     eOR_CI = evidence$eOR_CI[i],
+                                     p_value = evidence$p_value[i])
                     )
                 }
             }
@@ -168,48 +159,83 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             
             table3$setRow(rowNo = 1,
                          values = list(
-                             Factor = results$Factor[1],
-                             I2 = results$I2[1],
-                             PI_eG = results$PI_eG[1],
-                             PI_eOR = results$PI_eOR[1],
-                             egger_p = results$egger_p[1],
-                             ESB_p = results$ESB_p[1],
-                             power_med = results$power_med[1],
-                             JK_p = results$JK_p[1],
-                             largest_CI_eG = results$largest_CI_eG[1],
-                             largest_CI_eOR = results$largest_CI_eOR[1],
-                             rob = results$rob[1],
-                             amstar = results$amstar[1])
+                             Factor = evidence$Factor[1],
+                             I2 = evidence$I2[1],
+                             PI_eG = evidence$PI_eG[1],
+                             PI_eOR = evidence$PI_eOR[1],
+                             egger_p = evidence$egger_p[1],
+                             ESB_p = evidence$ESB_p[1],
+                             power_med = evidence$power_med[1],
+                             JK_p = evidence$JK_p[1],
+                             largest_CI_eG = evidence$largest_CI_eG[1],
+                             largest_CI_eOR = evidence$largest_CI_eOR[1],
+                             rob = evidence$rob[1],
+                             amstar = evidence$amstar[1])
             )
             
-            if (length(unique(results$Factor)) > 1) {
-                for (i in 2:(length(unique(results$Factor)))) {
+            if (length(unique(evidence$Factor)) > 1) {
+                for (i in 2:(length(unique(evidence$Factor)))) {
                     table3$addRow(rowKey = i,
                                   values = list(
-                                      Factor = results$Factor[i],
-                                      I2 = results$I2[i],
-                                      PI_eG = results$PI_eG[i],
-                                      PI_eOR = results$PI_eOR[i],
-                                      egger_p = results$egger_p[i],
-                                      ESB_p = results$ESB_p[i],
-                                      power_med = results$power_med[i],
-                                      JK_p = results$JK_p[i],
-                                      largest_CI_eG = results$largest_CI_eG[i],
-                                      largest_CI_eOR = results$largest_CI_eOR[i],
-                                      rob = results$rob[i],
-                                      amstar = results$amstar[i])
+                                      Factor = evidence$Factor[i],
+                                      I2 = evidence$I2[i],
+                                      PI_eG = evidence$PI_eG[i],
+                                      PI_eOR = evidence$PI_eOR[i],
+                                      egger_p = evidence$egger_p[i],
+                                      ESB_p = evidence$ESB_p[i],
+                                      power_med = evidence$power_med[i],
+                                      JK_p = evidence$JK_p[i],
+                                      largest_CI_eG = evidence$largest_CI_eG[i],
+                                      largest_CI_eOR = evidence$largest_CI_eOR[i],
+                                      rob = evidence$rob[i],
+                                      amstar = evidence$amstar[i])
                     )
                 }
             }
-            plotData <- res
+            plotData <- evid
             image <- self$results$plot
             image$setState(plotData)
-        },
-        .plot = function(image, criteria = self$options$criteria, ...) {
+        }
+        ,
+        .plot = function(image, ...) {
             plotData <- image$state
-            forest.umbrella(x = add.evidence(plotData, criteria = criteria))
+            title <- ifelse(is.null(self$options$title_forest), "", self$options$title_forest)
+            title_xaxis <- ifelse(is.null(self$options$title_xaxis), NA, self$options$title_xaxis)
+            maxvalue <- ifelse(self$options$max_x == -9999, 3, self$options$max_x)
+            if (self$options$class_forest == "no_rest") {
+                class_restrict <- c("I", "II", "III", "IV", "V", "ns", "High", "Moderate", "Weak", "Very weak")
+            } else if (self$options$class_forest == "II") {
+                class_restrict <- c("I", "II")
+            } else if (self$options$class_forest == "III") {
+                class_restrict <- c("I", "III")
+            } else if (self$options$class_forest == "IV") {
+                class_restrict <- c("I", "III", "IV")
+            } else if (self$options$class_forest == "Moderate") {
+                class_restrict <- c("High", "Moderate")
+            } else if (self$options$class_forest == "Weak") {
+                class_restrict <- c("High", "Moderate", "Weak")
+            } 
+            forest.umbrella(x = plotData, 
+                            measure = self$options$measure_forest,
+                            max.value = maxvalue,
+                            main_title = title,
+                            main_x_axis = title_xaxis,
+                            print.classes = class_restrict,
+                            cex_title = self$options$cex + 0.4,
+                            cex_text_header = self$options$cex,
+                            cex_text = self$options$cex - 0.1,
+                            cex_value_header = self$options$cex,
+                            cex_value = self$options$cex - 0.1,
+                            cex_x_axis = self$options$cex + 0.1,
+                            cex_x_axis_value = self$options$cex - 0.2,
+                            cex_dots = self$options$cex_dot + 0.2,
+                            x_lim_adj = self$options$x_lim_adj,
+                            y_lim_adj = self$options$y_lim_adj,
+                            x_axis_adj = self$options$x_axis_adj
+                            )
             TRUE
-        })
+        }
+        )
 )
 
 

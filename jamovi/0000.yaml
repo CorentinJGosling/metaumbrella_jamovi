@@ -1,17 +1,30 @@
 ---
-title: What the Package Does (Title Case)
+title: Umbrella Review Module for Jamovi
 name: metaumbrella
 version: 0.0.0
 jms: '1.0'
 authors:
-  - Who wrote it
-maintainer: The package maintainer <yourself@somewhere.net>
+  - >-
+    Corentin J Gosling [aut, cre], Aleix Solanes [aut], Paolo Fusar-Poli [aut],
+    Joaquim Radua [aut]
+maintainer: Corentin J Gosling <cgosling@parisnanterre.fr>
 date: '1970-01-01'
 type: R
 description: >-
-  More about what it does (maybe more than one line) Use four spaces when
-  indenting paragraphs within the Description.
+  A comprehensive range of facilities to perform umbrella reviews with
+  stratification of the evidence in R. The package accomplishes this aim by
+  building on three core functions that: (i) automatically perform all required
+  calculations in an umbrella review (including but not limited to
+  meta-analyses), (ii) stratify evidence according to various classification
+  criteria, and (iii) generate a visual representation of the results. Note that
+  if you are not familiar with R, the core features of this package are
+  available from a web browser (<https://www.metaumbrella.org/>).
 analyses:
+  - title: Check dataset formatting
+    name: check
+    ns: metaumbrella
+    menuGroup: metaumbrella_jmv
+    menuTitle: Check dataset formatting
   - title: Umbrella review
     name: umbrella
     ns: metaumbrella
@@ -19,5 +32,13 @@ analyses:
     menuTitle: Umbrella review
 usesNative: true
 minApp: 1.0.8
+refs:
+  emmeans:
+    type: software
+    author: 'Lenth, R.'
+    year: 2020
+    title: 'emmeans: Estimated Marginal Means, aka Least-Squares Means'
+    publisher: '[R package]. Retrieved from https://cran.r-project.org/package=emmeans'
+    url: 'https://cran.r-project.org/package=emmeans'
 
 ...

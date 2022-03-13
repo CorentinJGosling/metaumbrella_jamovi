@@ -303,3 +303,75 @@ children:
           - type: TextBox
             name: r
             format: number
+  - type: CollapseBox
+    collapsed: true
+    label: Forest plot
+    margin: large
+    children:
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: Label
+            label: Size of the figure
+            children:
+              - type: TextBox
+                name: x_lim_adj
+                format: number
+              - type: TextBox
+                name: y_lim_adj
+                format: number
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: Label
+            label: Titles
+            children:
+              - type: TextBox
+                name: title_forest
+                format: string
+              - type: TextBox
+                name: title_xaxis
+                format: string
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: Label
+            label: Equivalent Hedges' g / Odds ratio
+            children:
+              - type: ComboBox
+                name: measure_forest
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: Label
+            label: Lowest class displayed
+            children:
+              - type: ComboBox
+                name: class_forest
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: LayoutBox
+            margin: large
+            children:
+              - type: Label
+                label: Size of elements
+                children:
+                  - type: TextBox
+                    name: cex
+                    format: number
+                  - type: TextBox
+                    name: cex_dot
+                    format: number
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: Label
+            label: Adjustments
+            children:
+              - type: TextBox
+                name: x_axis_adj
+                format: number
+              - type: TextBox
+                name: max_x
+                format: number

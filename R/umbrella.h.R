@@ -63,7 +63,17 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             largest_CI_1 = FALSE,
             largest_CI_2 = FALSE,
             largest_CI_3 = FALSE,
-            largest_CI_4 = FALSE, ...) {
+            largest_CI_4 = FALSE,
+            measure_forest = "eG",
+            class_forest = "no_rest",
+            title_forest = NULL,
+            title_xaxis = NULL,
+            cex = 1,
+            cex_dot = 1,
+            x_lim_adj = 0,
+            y_lim_adj = 0,
+            max_x = -9999,
+            x_axis_adj = 0, ...) {
 
             super$initialize(
                 package="metaumbrella",
@@ -362,6 +372,58 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 "largest_CI_4",
                 largest_CI_4,
                 default=FALSE)
+            private$..measure_forest <- jmvcore::OptionList$new(
+                "measure_forest",
+                measure_forest,
+                options=list(
+                    "eG",
+                    "eOR"),
+                default="eG")
+            private$..class_forest <- jmvcore::OptionList$new(
+                "class_forest",
+                class_forest,
+                options=list(
+                    "no_rest",
+                    "I",
+                    "II",
+                    "III",
+                    "IV",
+                    "High",
+                    "Moderate",
+                    "Low"),
+                default="no_rest")
+            private$..title_forest <- jmvcore::OptionString$new(
+                "title_forest",
+                title_forest)
+            private$..title_xaxis <- jmvcore::OptionString$new(
+                "title_xaxis",
+                title_xaxis)
+            private$..cex <- jmvcore::OptionNumber$new(
+                "cex",
+                cex,
+                min=0,
+                default=1)
+            private$..cex_dot <- jmvcore::OptionNumber$new(
+                "cex_dot",
+                cex_dot,
+                min=0,
+                default=1)
+            private$..x_lim_adj <- jmvcore::OptionNumber$new(
+                "x_lim_adj",
+                x_lim_adj,
+                default=0)
+            private$..y_lim_adj <- jmvcore::OptionNumber$new(
+                "y_lim_adj",
+                y_lim_adj,
+                default=0)
+            private$..max_x <- jmvcore::OptionNumber$new(
+                "max_x",
+                max_x,
+                default=-9999)
+            private$..x_axis_adj <- jmvcore::OptionNumber$new(
+                "x_axis_adj",
+                x_axis_adj,
+                default=0)
 
             self$.addOption(private$..vars)
             self$.addOption(private$..criteria)
@@ -421,6 +483,16 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$.addOption(private$..largest_CI_2)
             self$.addOption(private$..largest_CI_3)
             self$.addOption(private$..largest_CI_4)
+            self$.addOption(private$..measure_forest)
+            self$.addOption(private$..class_forest)
+            self$.addOption(private$..title_forest)
+            self$.addOption(private$..title_xaxis)
+            self$.addOption(private$..cex)
+            self$.addOption(private$..cex_dot)
+            self$.addOption(private$..x_lim_adj)
+            self$.addOption(private$..y_lim_adj)
+            self$.addOption(private$..max_x)
+            self$.addOption(private$..x_axis_adj)
         }),
     active = list(
         vars = function() private$..vars$value,
@@ -480,7 +552,17 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         largest_CI_1 = function() private$..largest_CI_1$value,
         largest_CI_2 = function() private$..largest_CI_2$value,
         largest_CI_3 = function() private$..largest_CI_3$value,
-        largest_CI_4 = function() private$..largest_CI_4$value),
+        largest_CI_4 = function() private$..largest_CI_4$value,
+        measure_forest = function() private$..measure_forest$value,
+        class_forest = function() private$..class_forest$value,
+        title_forest = function() private$..title_forest$value,
+        title_xaxis = function() private$..title_xaxis$value,
+        cex = function() private$..cex$value,
+        cex_dot = function() private$..cex_dot$value,
+        x_lim_adj = function() private$..x_lim_adj$value,
+        y_lim_adj = function() private$..y_lim_adj$value,
+        max_x = function() private$..max_x$value,
+        x_axis_adj = function() private$..x_axis_adj$value),
     private = list(
         ..vars = NA,
         ..criteria = NA,
@@ -539,7 +621,17 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         ..largest_CI_1 = NA,
         ..largest_CI_2 = NA,
         ..largest_CI_3 = NA,
-        ..largest_CI_4 = NA)
+        ..largest_CI_4 = NA,
+        ..measure_forest = NA,
+        ..class_forest = NA,
+        ..title_forest = NA,
+        ..title_xaxis = NA,
+        ..cex = NA,
+        ..cex_dot = NA,
+        ..x_lim_adj = NA,
+        ..y_lim_adj = NA,
+        ..max_x = NA,
+        ..x_axis_adj = NA)
 )
 
 umbrellaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
@@ -556,7 +648,7 @@ umbrellaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 options=options,
                 name="",
-                title="umbrella")
+                title="Results of the umbrella review")
             self$add(jmvcore::Table$new(
                 options=options,
                 name="strattable",
@@ -662,9 +754,9 @@ umbrellaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$add(jmvcore::Image$new(
                 options=options,
                 name="plot",
-                title="Descriptives Plot",
-                width=600,
-                height=500,
+                title="Forest Plot",
+                width=1000,
+                height=1000,
                 renderFun=".plot"))}))
 
 umbrellaBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
