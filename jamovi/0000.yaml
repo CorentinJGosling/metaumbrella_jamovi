@@ -1,14 +1,14 @@
 ---
 title: Umbrella Review Module for Jamovi
 name: metaumbrella
-version: 0.0.0
+version: 1.0.4
 jms: '1.0'
 authors:
   - >-
     Corentin J Gosling [aut, cre], Aleix Solanes [aut], Paolo Fusar-Poli [aut],
     Joaquim Radua [aut]
 maintainer: Corentin J Gosling <cgosling@parisnanterre.fr>
-date: '1970-01-01'
+date: '2022-06-13'
 type: R
 description: >-
   A comprehensive range of facilities to perform umbrella reviews with
@@ -20,11 +20,6 @@ description: >-
   if you are not familiar with R, the core features of this package are
   available from a web browser (<https://www.metaumbrella.org/>).
 analyses:
-  - title: Check dataset formatting
-    name: check
-    ns: metaumbrella
-    menuGroup: metaumbrella_jmv
-    menuTitle: Check dataset formatting
   - title: Umbrella review
     name: umbrella
     ns: metaumbrella
@@ -32,13 +27,5 @@ analyses:
     menuTitle: Umbrella review
 usesNative: true
 minApp: 1.0.8
-refs:
-  emmeans:
-    type: software
-    author: 'Lenth, R.'
-    year: 2020
-    title: 'emmeans: Estimated Marginal Means, aka Least-Squares Means'
-    publisher: '[R package]. Retrieved from https://cran.r-project.org/package=emmeans'
-    url: 'https://cran.r-project.org/package=emmeans'
 
 ...

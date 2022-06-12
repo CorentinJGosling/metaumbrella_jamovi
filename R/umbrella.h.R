@@ -9,53 +9,55 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             vars = NULL,
             criteria = "Ioannidis",
             method.var = "REML",
+            pre_post_cor = 0.8,
             true_effect = "largest",
+            method.esb = "TESSPSST",
             mult.level = FALSE,
-            r = 0.5,
-            n_studies_1 = -9999,
-            n_studies_2 = -9999,
-            n_studies_3 = -9999,
-            n_studies_4 = -9999,
-            total_n_1 = -9999,
-            total_n_2 = -9999,
-            total_n_3 = -9999,
-            total_n_4 = -9999,
-            n_cases_1 = -9999,
-            n_cases_2 = -9999,
-            n_cases_3 = -9999,
-            n_cases_4 = -9999,
-            p_value_1 = -9999,
-            p_value_2 = -9999,
-            p_value_3 = -9999,
-            p_value_4 = -9999,
-            I2_1 = -9999,
-            I2_2 = -9999,
-            I2_3 = -9999,
-            I2_4 = -9999,
-            imprecision_1 = -9999,
-            imprecision_2 = -9999,
-            imprecision_3 = -9999,
-            imprecision_4 = -9999,
-            rob_1 = -9999,
-            rob_2 = -9999,
-            rob_3 = -9999,
-            rob_4 = -9999,
-            amstar_1 = -9999,
-            amstar_2 = -9999,
-            amstar_3 = -9999,
-            amstar_4 = -9999,
-            egger_p_1 = -9999,
-            egger_p_2 = -9999,
-            egger_p_3 = -9999,
-            egger_p_4 = -9999,
-            esb_p_1 = -9999,
-            esb_p_2 = -9999,
-            esb_p_3 = -9999,
-            esb_p_4 = -9999,
-            JK_p_1 = -9999,
-            JK_p_2 = -9999,
-            JK_p_3 = -9999,
-            JK_p_4 = -9999,
+            r = 0.8,
+            n_studies_1 = NULL,
+            n_studies_2 = NULL,
+            n_studies_3 = NULL,
+            n_studies_4 = NULL,
+            total_n_1 = NULL,
+            total_n_2 = NULL,
+            total_n_3 = NULL,
+            total_n_4 = NULL,
+            n_cases_1 = NULL,
+            n_cases_2 = NULL,
+            n_cases_3 = NULL,
+            n_cases_4 = NULL,
+            p_value_1 = NULL,
+            p_value_2 = NULL,
+            p_value_3 = NULL,
+            p_value_4 = NULL,
+            I2_1 = NULL,
+            I2_2 = NULL,
+            I2_3 = NULL,
+            I2_4 = NULL,
+            imprecision_1 = NULL,
+            imprecision_2 = NULL,
+            imprecision_3 = NULL,
+            imprecision_4 = NULL,
+            rob_1 = NULL,
+            rob_2 = NULL,
+            rob_3 = NULL,
+            rob_4 = NULL,
+            amstar_1 = NULL,
+            amstar_2 = NULL,
+            amstar_3 = NULL,
+            amstar_4 = NULL,
+            egger_p_1 = NULL,
+            egger_p_2 = NULL,
+            egger_p_3 = NULL,
+            egger_p_4 = NULL,
+            esb_p_1 = NULL,
+            esb_p_2 = NULL,
+            esb_p_3 = NULL,
+            esb_p_4 = NULL,
+            JK_p_1 = NULL,
+            JK_p_2 = NULL,
+            JK_p_3 = NULL,
+            JK_p_4 = NULL,
             pi_1 = FALSE,
             pi_2 = FALSE,
             pi_3 = FALSE,
@@ -72,7 +74,7 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             cex_dot = 1,
             x_lim_adj = 0,
             y_lim_adj = 0,
-            max_x = -9999,
+            max_x = NULL,
             x_axis_adj = 0, ...) {
 
             super$initialize(
@@ -101,8 +103,15 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "DL",
                     "hksj",
                     "ML",
-                    "PM"),
+                    "PM",
+                    "FE"),
                 default="REML")
+            private$..pre_post_cor <- jmvcore::OptionNumber$new(
+                "pre_post_cor",
+                pre_post_cor,
+                min=0,
+                max=1,
+                default=0.8)
             private$..true_effect <- jmvcore::OptionList$new(
                 "true_effect",
                 true_effect,
@@ -110,6 +119,16 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "largest",
                     "pooled"),
                 default="largest")
+            private$..method.esb <- jmvcore::OptionList$new(
+                "method.esb",
+                method.esb,
+                options=list(
+                    "IT.binom",
+                    "IT.chisq",
+                    "TESS",
+                    "PSST",
+                    "TESSPSST"),
+                default="TESSPSST")
             private$..mult.level <- jmvcore::OptionBool$new(
                 "mult.level",
                 mult.level,
@@ -119,227 +138,139 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 r,
                 min=0,
                 max=1,
-                default=0.5)
-            private$..n_studies_1 <- jmvcore::OptionNumber$new(
+                default=0.8)
+            private$..n_studies_1 <- jmvcore::OptionString$new(
                 "n_studies_1",
-                n_studies_1,
-                min=-9999,
-                default=-9999)
-            private$..n_studies_2 <- jmvcore::OptionNumber$new(
+                n_studies_1)
+            private$..n_studies_2 <- jmvcore::OptionString$new(
                 "n_studies_2",
-                n_studies_2,
-                min=-9999,
-                default=-9999)
-            private$..n_studies_3 <- jmvcore::OptionNumber$new(
+                n_studies_2)
+            private$..n_studies_3 <- jmvcore::OptionString$new(
                 "n_studies_3",
-                n_studies_3,
-                min=-9999,
-                default=-9999)
-            private$..n_studies_4 <- jmvcore::OptionNumber$new(
+                n_studies_3)
+            private$..n_studies_4 <- jmvcore::OptionString$new(
                 "n_studies_4",
-                n_studies_4,
-                min=-9999,
-                default=-9999)
-            private$..total_n_1 <- jmvcore::OptionNumber$new(
+                n_studies_4)
+            private$..total_n_1 <- jmvcore::OptionString$new(
                 "total_n_1",
-                total_n_1,
-                min=-9999,
-                default=-9999)
-            private$..total_n_2 <- jmvcore::OptionNumber$new(
+                total_n_1)
+            private$..total_n_2 <- jmvcore::OptionString$new(
                 "total_n_2",
-                total_n_2,
-                min=-9999,
-                default=-9999)
-            private$..total_n_3 <- jmvcore::OptionNumber$new(
+                total_n_2)
+            private$..total_n_3 <- jmvcore::OptionString$new(
                 "total_n_3",
-                total_n_3,
-                min=-9999,
-                default=-9999)
-            private$..total_n_4 <- jmvcore::OptionNumber$new(
+                total_n_3)
+            private$..total_n_4 <- jmvcore::OptionString$new(
                 "total_n_4",
-                total_n_4,
-                min=-9999,
-                default=-9999)
-            private$..n_cases_1 <- jmvcore::OptionNumber$new(
+                total_n_4)
+            private$..n_cases_1 <- jmvcore::OptionString$new(
                 "n_cases_1",
-                n_cases_1,
-                min=-9999,
-                default=-9999)
-            private$..n_cases_2 <- jmvcore::OptionNumber$new(
+                n_cases_1)
+            private$..n_cases_2 <- jmvcore::OptionString$new(
                 "n_cases_2",
-                n_cases_2,
-                min=-9999,
-                default=-9999)
-            private$..n_cases_3 <- jmvcore::OptionNumber$new(
+                n_cases_2)
+            private$..n_cases_3 <- jmvcore::OptionString$new(
                 "n_cases_3",
-                n_cases_3,
-                min=-9999,
-                default=-9999)
-            private$..n_cases_4 <- jmvcore::OptionNumber$new(
+                n_cases_3)
+            private$..n_cases_4 <- jmvcore::OptionString$new(
                 "n_cases_4",
-                n_cases_4,
-                min=-9999,
-                default=-9999)
-            private$..p_value_1 <- jmvcore::OptionNumber$new(
+                n_cases_4)
+            private$..p_value_1 <- jmvcore::OptionString$new(
                 "p_value_1",
-                p_value_1,
-                min=-9999,
-                default=-9999)
-            private$..p_value_2 <- jmvcore::OptionNumber$new(
+                p_value_1)
+            private$..p_value_2 <- jmvcore::OptionString$new(
                 "p_value_2",
-                p_value_2,
-                min=-9999,
-                default=-9999)
-            private$..p_value_3 <- jmvcore::OptionNumber$new(
+                p_value_2)
+            private$..p_value_3 <- jmvcore::OptionString$new(
                 "p_value_3",
-                p_value_3,
-                min=-9999,
-                default=-9999)
-            private$..p_value_4 <- jmvcore::OptionNumber$new(
+                p_value_3)
+            private$..p_value_4 <- jmvcore::OptionString$new(
                 "p_value_4",
-                p_value_4,
-                min=-9999,
-                default=-9999)
-            private$..I2_1 <- jmvcore::OptionNumber$new(
+                p_value_4)
+            private$..I2_1 <- jmvcore::OptionString$new(
                 "I2_1",
-                I2_1,
-                min=-9999,
-                default=-9999)
-            private$..I2_2 <- jmvcore::OptionNumber$new(
+                I2_1)
+            private$..I2_2 <- jmvcore::OptionString$new(
                 "I2_2",
-                I2_2,
-                min=-9999,
-                default=-9999)
-            private$..I2_3 <- jmvcore::OptionNumber$new(
+                I2_2)
+            private$..I2_3 <- jmvcore::OptionString$new(
                 "I2_3",
-                I2_3,
-                min=-9999,
-                default=-9999)
-            private$..I2_4 <- jmvcore::OptionNumber$new(
+                I2_3)
+            private$..I2_4 <- jmvcore::OptionString$new(
                 "I2_4",
-                I2_4,
-                min=-9999,
-                default=-9999)
-            private$..imprecision_1 <- jmvcore::OptionNumber$new(
+                I2_4)
+            private$..imprecision_1 <- jmvcore::OptionString$new(
                 "imprecision_1",
-                imprecision_1,
-                min=-9999,
-                default=-9999)
-            private$..imprecision_2 <- jmvcore::OptionNumber$new(
+                imprecision_1)
+            private$..imprecision_2 <- jmvcore::OptionString$new(
                 "imprecision_2",
-                imprecision_2,
-                min=-9999,
-                default=-9999)
-            private$..imprecision_3 <- jmvcore::OptionNumber$new(
+                imprecision_2)
+            private$..imprecision_3 <- jmvcore::OptionString$new(
                 "imprecision_3",
-                imprecision_3,
-                min=-9999,
-                default=-9999)
-            private$..imprecision_4 <- jmvcore::OptionNumber$new(
+                imprecision_3)
+            private$..imprecision_4 <- jmvcore::OptionString$new(
                 "imprecision_4",
-                imprecision_4,
-                min=-9999,
-                default=-9999)
-            private$..rob_1 <- jmvcore::OptionNumber$new(
+                imprecision_4)
+            private$..rob_1 <- jmvcore::OptionString$new(
                 "rob_1",
-                rob_1,
-                min=-9999,
-                default=-9999)
-            private$..rob_2 <- jmvcore::OptionNumber$new(
+                rob_1)
+            private$..rob_2 <- jmvcore::OptionString$new(
                 "rob_2",
-                rob_2,
-                min=-9999,
-                default=-9999)
-            private$..rob_3 <- jmvcore::OptionNumber$new(
+                rob_2)
+            private$..rob_3 <- jmvcore::OptionString$new(
                 "rob_3",
-                rob_3,
-                min=-9999,
-                default=-9999)
-            private$..rob_4 <- jmvcore::OptionNumber$new(
+                rob_3)
+            private$..rob_4 <- jmvcore::OptionString$new(
                 "rob_4",
-                rob_4,
-                min=-9999,
-                default=-9999)
-            private$..amstar_1 <- jmvcore::OptionNumber$new(
+                rob_4)
+            private$..amstar_1 <- jmvcore::OptionString$new(
                 "amstar_1",
-                amstar_1,
-                min=-9999,
-                default=-9999)
-            private$..amstar_2 <- jmvcore::OptionNumber$new(
+                amstar_1)
+            private$..amstar_2 <- jmvcore::OptionString$new(
                 "amstar_2",
-                amstar_2,
-                min=-9999,
-                default=-9999)
-            private$..amstar_3 <- jmvcore::OptionNumber$new(
+                amstar_2)
+            private$..amstar_3 <- jmvcore::OptionString$new(
                 "amstar_3",
-                amstar_3,
-                min=-9999,
-                default=-9999)
-            private$..amstar_4 <- jmvcore::OptionNumber$new(
+                amstar_3)
+            private$..amstar_4 <- jmvcore::OptionString$new(
                 "amstar_4",
-                amstar_4,
-                min=-9999,
-                default=-9999)
-            private$..egger_p_1 <- jmvcore::OptionNumber$new(
+                amstar_4)
+            private$..egger_p_1 <- jmvcore::OptionString$new(
                 "egger_p_1",
-                egger_p_1,
-                min=-9999,
-                default=-9999)
-            private$..egger_p_2 <- jmvcore::OptionNumber$new(
+                egger_p_1)
+            private$..egger_p_2 <- jmvcore::OptionString$new(
                 "egger_p_2",
-                egger_p_2,
-                min=-9999,
-                default=-9999)
-            private$..egger_p_3 <- jmvcore::OptionNumber$new(
+                egger_p_2)
+            private$..egger_p_3 <- jmvcore::OptionString$new(
                 "egger_p_3",
-                egger_p_3,
-                min=-9999,
-                default=-9999)
-            private$..egger_p_4 <- jmvcore::OptionNumber$new(
+                egger_p_3)
+            private$..egger_p_4 <- jmvcore::OptionString$new(
                 "egger_p_4",
-                egger_p_4,
-                min=-9999,
-                default=-9999)
-            private$..esb_p_1 <- jmvcore::OptionNumber$new(
+                egger_p_4)
+            private$..esb_p_1 <- jmvcore::OptionString$new(
                 "esb_p_1",
-                esb_p_1,
-                min=-9999,
-                default=-9999)
-            private$..esb_p_2 <- jmvcore::OptionNumber$new(
+                esb_p_1)
+            private$..esb_p_2 <- jmvcore::OptionString$new(
                 "esb_p_2",
-                esb_p_2,
-                min=-9999,
-                default=-9999)
-            private$..esb_p_3 <- jmvcore::OptionNumber$new(
+                esb_p_2)
+            private$..esb_p_3 <- jmvcore::OptionString$new(
                 "esb_p_3",
-                esb_p_3,
-                min=-9999,
-                default=-9999)
-            private$..esb_p_4 <- jmvcore::OptionNumber$new(
+                esb_p_3)
+            private$..esb_p_4 <- jmvcore::OptionString$new(
                 "esb_p_4",
-                esb_p_4,
-                min=-9999,
-                default=-9999)
-            private$..JK_p_1 <- jmvcore::OptionNumber$new(
+                esb_p_4)
+            private$..JK_p_1 <- jmvcore::OptionString$new(
                 "JK_p_1",
-                JK_p_1,
-                min=-9999,
-                default=-9999)
-            private$..JK_p_2 <- jmvcore::OptionNumber$new(
+                JK_p_1)
+            private$..JK_p_2 <- jmvcore::OptionString$new(
                 "JK_p_2",
-                JK_p_2,
-                min=-9999,
-                default=-9999)
-            private$..JK_p_3 <- jmvcore::OptionNumber$new(
+                JK_p_2)
+            private$..JK_p_3 <- jmvcore::OptionString$new(
                 "JK_p_3",
-                JK_p_3,
-                min=-9999,
-                default=-9999)
-            private$..JK_p_4 <- jmvcore::OptionNumber$new(
+                JK_p_3)
+            private$..JK_p_4 <- jmvcore::OptionString$new(
                 "JK_p_4",
-                JK_p_4,
-                min=-9999,
-                default=-9999)
+                JK_p_4)
             private$..pi_1 <- jmvcore::OptionBool$new(
                 "pi_1",
                 pi_1,
@@ -416,10 +347,9 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 "y_lim_adj",
                 y_lim_adj,
                 default=0)
-            private$..max_x <- jmvcore::OptionNumber$new(
+            private$..max_x <- jmvcore::OptionString$new(
                 "max_x",
-                max_x,
-                default=-9999)
+                max_x)
             private$..x_axis_adj <- jmvcore::OptionNumber$new(
                 "x_axis_adj",
                 x_axis_adj,
@@ -428,7 +358,9 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$.addOption(private$..vars)
             self$.addOption(private$..criteria)
             self$.addOption(private$..method.var)
+            self$.addOption(private$..pre_post_cor)
             self$.addOption(private$..true_effect)
+            self$.addOption(private$..method.esb)
             self$.addOption(private$..mult.level)
             self$.addOption(private$..r)
             self$.addOption(private$..n_studies_1)
@@ -498,7 +430,9 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         vars = function() private$..vars$value,
         criteria = function() private$..criteria$value,
         method.var = function() private$..method.var$value,
+        pre_post_cor = function() private$..pre_post_cor$value,
         true_effect = function() private$..true_effect$value,
+        method.esb = function() private$..method.esb$value,
         mult.level = function() private$..mult.level$value,
         r = function() private$..r$value,
         n_studies_1 = function() private$..n_studies_1$value,
@@ -567,7 +501,9 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         ..vars = NA,
         ..criteria = NA,
         ..method.var = NA,
+        ..pre_post_cor = NA,
         ..true_effect = NA,
+        ..method.esb = NA,
         ..mult.level = NA,
         ..r = NA,
         ..n_studies_1 = NA,
@@ -638,6 +574,8 @@ umbrellaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "umbrellaResults",
     inherit = jmvcore::Group,
     active = list(
+        text = function() private$.items[["text"]],
+        checktable = function() private$.items[["checktable"]],
         strattable = function() private$.items[["strattable"]],
         metatable = function() private$.items[["metatable"]],
         addtable = function() private$.items[["addtable"]],
@@ -649,6 +587,30 @@ umbrellaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 name="",
                 title="Results of the umbrella review")
+            self$add(jmvcore::Preformatted$new(
+                options=options,
+                name="text"))
+            self$add(jmvcore::Table$new(
+                options=options,
+                name="checktable",
+                title="List of problematic rows (if any)",
+                rows=1,
+                columns=list(
+                    list(
+                        `name`="Row", 
+                        `type`="text"),
+                    list(
+                        `name`="Type_errors", 
+                        `type`="text"),
+                    list(
+                        `name`="Description_errors", 
+                        `type`="text"),
+                    list(
+                        `name`="author", 
+                        `type`="text"),
+                    list(
+                        `name`="year", 
+                        `type`="text"))))
             self$add(jmvcore::Table$new(
                 options=options,
                 name="strattable",
@@ -755,8 +717,8 @@ umbrellaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 name="plot",
                 title="Forest Plot",
-                width=1000,
-                height=1000,
+                width=100,
+                height=100,
                 renderFun=".plot"))}))
 
 umbrellaBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(

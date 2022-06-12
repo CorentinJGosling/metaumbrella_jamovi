@@ -22,10 +22,17 @@
     }
 
     # criteria 3 - power
-    if(x_i$measure == "IRR") {
+    if (x_i$measure == "IRR") {
       if (.power_d(x_i$n$cases / 2, x_i$n$cases / 2, 0.2) < 0.8) { # serious imprecision: ois for d = 0.2
         y_i = y_i - 1
         if (.power_d(x_i$n$cases / 2, x_i$n$cases / 2, 0.5) < 0.8) { # very serious imprecision: not even ois for d = 0.5
+          y_i = y_i - 1
+        }
+      }
+    } else if (x_i$measure == "R") {
+      if (.power_d(x_i$n$total_n / 2, x_i$n$total_n / 2, 0.2) < 0.8) { # serious imprecision: ois for d = 0.2
+        y_i = y_i - 1
+        if (.power_d(x_i$n$total_n / 2, x_i$n$total_n / 2, 0.5) < 0.8) { # very serious imprecision: not even ois for d = 0.5
           y_i = y_i - 1
         }
       }
@@ -57,7 +64,7 @@
   attr(x, "criteria") = "Ioannidis"
   for (name in names(x)) {
     x_i = x[[name]]
-    p.value <- x_i$random$p.value
+    p.value <- x_i$ma_results$p.value
     if (is.na(p.value)) { # in OR meta function needs exposed, if no exposed then NA returned
       warning("Error calculating evidence in ", rownames(x_i$data))
     }
@@ -67,13 +74,15 @@
       if (p.value < 1e-6) {
         if (
           x_i$heterogeneity$i2 < 50 &&
-          !is.na(x_i$random$pi_lo) &&
-          sign(x_i$random$pi_lo) == sign(x_i$random$pi_up) &&
+          !is.na(x_i$ma_results$pi_lo) &&
+          sign(x_i$ma_results$pi_lo) == sign(x_i$ma_results$pi_up) &&
           x_i$egger$p.value > 0.05 &&
           x_i$esb$p.value > 0.05
         ) {
           y_i = "I"
-        } else if (sign(x_i$largest$ci_lo) == sign(x_i$largest$ci_up)) {
+        } else if (sign(x_i$largest$ci_lo) == sign(x_i$largest$ci_up) &&
+                   sign(x_i$largest$ci_lo) == sign(x_i$ma_results$ci_lo) &&
+                   sign(x_i$largest$ci_up) == sign(x_i$ma_results$ci_up)) {
           y_i = "II"
         } else {
           y_i = "III"
@@ -113,18 +122,21 @@
       # extraction information from the umbrella object
       x_i = x[[name]]
       measure <- x_i$measure
-      total_n <- x_i$n$cases_and_controls
+      total_n <- x_i$n$total_n
       n_studies <- x_i$n$studies
       n_cases <- x_i$n$cases
-      p_value <- x_i$random$p.value
+      p_value <- x_i$ma_results$p.value
       I2 <- x_i$heterogeneity$i2
       riskofbias <- x_i$riskofbias
       amstar <- x_i$amstar
       JK_p <- max(x_i$jk)
       egger_p <- x_i$egger$p.value
       esb_p <- x_i$esb$p.value
-      pi <- ifelse(sign(x_i$random$pi_lo) == sign(x_i$random$pi_up), "notnull", "null")
-      largest_CI <- ifelse(sign(x_i$largest$ci_lo) == sign(x_i$largest$ci_up), "notnull", "null")
+      pi <- ifelse(sign(x_i$ma_results$pi_lo) == sign(x_i$ma_results$pi_up), "notnull", "null")
+      largest_CI <- ifelse(sign(x_i$largest$ci_lo) == sign(x_i$largest$ci_up) &&
+                           sign(x_i$largest$ci_lo) == - sign(x_i$ma_results$ci_lo) &&
+                           sign(x_i$largest$ci_up) == - sign(x_i$ma_results$ci_up), "opposite direction",
+                           ifelse(sign(x_i$largest$ci_lo) == sign(x_i$largest$ci_up), "notnull", "null"))
 
       if (any(duplicated(colnames(t(unlist(class_I))))) |
           any(duplicated(colnames(t(unlist(class_II))))) |
@@ -189,35 +201,35 @@
 
       # 1. total_n
       if (any(!is.na(data_class$total_n))) {
-        if(any(data_class$total_n[which(!is.na(data_class$total_n))] < 0 & data_class$n_studies[which(!is.na(data_class$n_studies))] != -9999)) {
+        if(any(data_class$total_n[which(!is.na(data_class$total_n))] < 0)) {
           stop("The 'total_n' inputs should be positive numbers. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
       }
 
       # 2. n_studies
       if (any(!is.na(data_class$n_studies))) {
-        if(any(data_class$n_studies[which(!is.na(data_class$n_studies))] < 0 & data_class$n_studies[which(!is.na(data_class$n_studies))] != -9999)) {
+        if(any(data_class$n_studies[which(!is.na(data_class$n_studies))] < 0)) {
           stop("The 'n_studies' inputs should be positive numbers. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
       }
 
       # 3. total_n
       if (any(!is.na(data_class$total_n))) {
-        if(any(data_class$total_n[which(!is.na(data_class$total_n))] < 0 & data_class$total_n[which(!is.na(data_class$total_n))] != -9999)) {
+        if(any(data_class$total_n[which(!is.na(data_class$total_n))] < 0)) {
           stop("The 'total_n' inputs should be positive numbers. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
       }
 
       # 4. n_cases
       if (any(!is.na(data_class$n_cases))) {
-        if(any(data_class$n_cases[which(!is.na(data_class$n_cases))] < 0 & data_class$n_studies[which(!is.na(data_class$n_studies))] != -9999)) {
+        if(any(data_class$n_cases[which(!is.na(data_class$n_cases))] < 0)) {
           stop("The 'n_cases' inputs should be positive numbers. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
       }
 
       # 5. p_value
       if (any(!is.na(data_class$p_value))) {
-        if(any(data_class$p_value[which(!is.na(data_class$p_value))] < 0 & data_class$n_studies[which(!is.na(data_class$n_studies))] != -9999) |
+        if(any(data_class$p_value[which(!is.na(data_class$p_value))] < 0) |
            any(data_class$p_value[which(!is.na(data_class$p_value))] > 1)) {
           stop("The 'p_value' inputs should be numbers within the [0, 1] range. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
@@ -225,7 +237,7 @@
 
       # 6. I2
       if (any(!is.na(data_class$I2))) {
-        if(any(data_class$I2[which(!is.na(data_class$I2))] < 0 & data_class$n_studies[which(!is.na(data_class$n_studies))] != -9999) |
+        if(any(data_class$I2[which(!is.na(data_class$I2))] < 0) |
            any(data_class$I2[which(!is.na(data_class$I2))] > 100)) {
           stop("The 'I2' inputs should be numbers within the [0, 100] range. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
@@ -240,7 +252,7 @@
 
       # 8. rob
       if (any(!is.na(data_class$rob))) {
-        if(any(data_class$rob[which(!is.na(data_class$rob))] < 0 & data_class$rob[which(!is.na(data_class$rob))] != -9999) |
+        if(any(data_class$rob[which(!is.na(data_class$rob))] < 0) |
            any(data_class$rob[which(!is.na(data_class$rob))] > 100)) {
           stop("The 'rob' inputs should be numbers within the [0, 100] range. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
@@ -248,14 +260,14 @@
 
       # 9. amstar
       if (any(!is.na(data_class$amstar))) {
-        if(any(data_class$amstar[which(!is.na(data_class$amstar))] < 0 & data_class$amstar[which(!is.na(data_class$amstar))] != -9999)) {
+        if(any(data_class$amstar[which(!is.na(data_class$amstar))] < 0)) {
           stop("The 'amstar' inputs should be positive numbers. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
       }
 
       # 8. egger_p
       if (any(!is.na(data_class$egger_p))) {
-        if(any(data_class$egger_p[which(!is.na(data_class$egger_p))] < 0 & data_class$egger_p[which(!is.na(data_class$egger_p))] != -9999) |
+        if(any(data_class$egger_p[which(!is.na(data_class$egger_p))] < 0) |
            any(data_class$egger_p[which(!is.na(data_class$egger_p))] > 1)) {
           stop("The 'egger_p' inputs should be p-values and shoud thus be numbers within the [0, 1] range. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
@@ -263,14 +275,14 @@
 
       # 10. esb_p.criteria
       if (any(!is.na(data_class$esb_p))) {
-        if(any(data_class$esb_p[which(!is.na(data_class$esb_p))] < 0 & data_class$esb_p[which(!is.na(data_class$esb_p))] != -9999) |
+        if(any(data_class$esb_p[which(!is.na(data_class$esb_p))] < 0) |
            any(data_class$esb_p[which(!is.na(data_class$esb_p))] > 1)) {
           stop("The 'esb_p' inputs should be p-values and shoud thus be numbers within the [0, 1] range. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
       }
       # 11. JK
       if (any(!is.na(data_class$JK_p))) {
-        if(any(data_class$JK_p[which(!is.na(data_class$JK_p))] < 0 & data_class$JK_p[which(!is.na(data_class$JK_p))] != -9999) |
+        if(any(data_class$JK_p[which(!is.na(data_class$JK_p))] < 0) |
            any(data_class$JK_p[which(!is.na(data_class$JK_p))] > 1)) {
           stop("The 'JK_p' inputs should be p-values and shoud thus be numbers within the [0, 1] range. See manual for more details on the formatting of the 'Personalized' criteria.")
         }
@@ -301,6 +313,13 @@
       # subsetting the vector containing all criteria to those chosen by the user
       list.criteria.nom.user <- col_names[used_criteria]
 
+      if (is.na(n_cases)) {
+        n_cases <- total_n / 2
+        if ("n_cases" %in% list.criteria.nom.user) {
+          factors_limited = append(factors_limited, name)
+          criteria_limited = append(criteria_limited, "n_cases")
+        }
+      }
       if (is.na(egger_p)) {
         egger_p <- -1
         if ("egger_p" %in% list.criteria.nom.user) {
@@ -371,9 +390,14 @@
 
       imprecision <- rep(NA, 4)
       for (i in which(!is.na(data_class$imprecision))) {
-        imprecision[i] <- ifelse(measure == "IRR",
-                                 .power_d(x_i$n$n_cases / 2, x_i$n$n_cases / 2, data_class$imprecision[i]),
-                                 .power_d(x_i$n$n_cases, x_i$n$controls, data_class$imprecision[i]))
+        imprecision[i] <- switch(measure,
+                                 "IRR" = .power_d(x_i$n$cases / 2, x_i$n$cases / 2, data_class$imprecision[i]),
+                                 "Z" = .power_d(x_i$n$total_n / 2, x_i$n$total_n / 2, data_class$imprecision[i]),
+                                 "SMD"=,
+                                 "SMC"=,
+                                 "OR"=,
+                                 "RR"=,
+                                 "HR"= .power_d(x_i$n$cases, x_i$n$controls, data_class$imprecision[i]))
       }
       # we create an imprecision vector based on user's input to have a more personalised output
       x[[name]]$imprecision <- c(rep(NA_real_, 4))
@@ -421,6 +445,10 @@
     }
     # print some warning messages
     if (verbose) {
+      if (any("n_cases" == criteria_limited)) {
+        message("- For ", length(factors_limited[which("n_cases" == criteria_limited)]), " factors the 'n_cases' criteria is used but the number of cases is not indicated in the dataset. In this situation, we assumed the number of cases to be half the total number of participants ('n_sample').")
+        attr(x, "message") = paste(attr(x, "message"), "\n- For ", length(factors_limited[which("n_cases" == criteria_limited)]), " factors the 'n_cases' criteria is used but the number of cases is not indicated in the dataset. In this situation, we assumed the number of cases to be half the total number of participants ('n_sample').")
+      }
       if (any("egger_p" == criteria_limited)) {
         message("- For ", length(factors_limited[which("egger_p" == criteria_limited)]), " factors the 'egger_p' criteria is used but cannot be calculated due to the small number of studies (n < 3). In this situation, the p-value of the Egger test is conservatively assumed to be lower than the thresold requested. These factors have a NA value for this criteria in the dataframe returned by the 'add.evidence()' function.")
         attr(x, "message") = paste(attr(x, "message"), "\n- For ", length(factors_limited[which("egger_p" == criteria_limited)]), " factors the 'egger_p' criteria is used but cannot be calculated due to the small number of studies (n < 3). In this situation, the p-value of the Egger test is conservatively assumed to be lower than the thresold requested. These factors have a NA value for this criteria in the dataframe returned by the 'add.evidence()' function.")

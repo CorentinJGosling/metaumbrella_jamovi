@@ -37,16 +37,16 @@ children:
                 children:
                   - type: TextBox
                     name: n_studies_1
-                    format: number
+                    format: string
                   - type: TextBox
                     name: n_studies_2
-                    format: number
+                    format: string
                   - type: TextBox
                     name: n_studies_3
-                    format: number
+                    format: string
                   - type: TextBox
                     name: n_studies_4
-                    format: number
+                    format: string
           - type: CollapseBox
             collapsed: true
             label: 2. Total number of participants
@@ -56,16 +56,16 @@ children:
                 children:
                   - type: TextBox
                     name: total_n_1
-                    format: number
+                    format: string
                   - type: TextBox
                     name: total_n_2
-                    format: number
+                    format: string
                   - type: TextBox
                     name: total_n_3
-                    format: number
+                    format: string
                   - type: TextBox
                     name: total_n_4
-                    format: number
+                    format: string
           - type: CollapseBox
             collapsed: true
             label: 3. Number of cases
@@ -75,16 +75,16 @@ children:
                 children:
                   - type: TextBox
                     name: n_cases_1
-                    format: number
+                    format: string
                   - type: TextBox
                     name: n_cases_2
-                    format: number
+                    format: string
                   - type: TextBox
                     name: n_cases_3
-                    format: number
+                    format: string
                   - type: TextBox
                     name: n_cases_4
-                    format: number
+                    format: string
           - type: CollapseBox
             collapsed: true
             label: 4. P-value of the random-effects meta-analysis
@@ -94,16 +94,16 @@ children:
                 children:
                   - type: TextBox
                     name: p_value_1
-                    format: number
+                    format: string
                   - type: TextBox
                     name: p_value_2
-                    format: number
+                    format: string
                   - type: TextBox
                     name: p_value_3
-                    format: number
+                    format: string
                   - type: TextBox
                     name: p_value_4
-                    format: number
+                    format: string
           - type: CollapseBox
             collapsed: true
             label: 5. Inconsistency
@@ -113,16 +113,16 @@ children:
                 children:
                   - type: TextBox
                     name: I2_1
-                    format: number
+                    format: string
                   - type: TextBox
                     name: I2_2
-                    format: number
+                    format: string
                   - type: TextBox
                     name: I2_3
-                    format: number
+                    format: string
                   - type: TextBox
                     name: I2_4
-                    format: number
+                    format: string
           - type: CollapseBox
             collapsed: true
             label: 6. Imprecision
@@ -132,16 +132,16 @@ children:
                 children:
                   - type: TextBox
                     name: imprecision_1
-                    format: number
+                    format: string
                   - type: TextBox
                     name: imprecision_2
-                    format: number
+                    format: string
                   - type: TextBox
                     name: imprecision_3
-                    format: number
+                    format: string
                   - type: TextBox
                     name: imprecision_4
-                    format: number
+                    format: string
           - type: CollapseBox
             collapsed: true
             label: 7. Risk of bias of individual studies
@@ -151,16 +151,16 @@ children:
                 children:
                   - type: TextBox
                     name: rob_1
-                    format: number
+                    format: string
                   - type: TextBox
                     name: rob_2
-                    format: number
+                    format: string
                   - type: TextBox
                     name: rob_3
-                    format: number
+                    format: string
                   - type: TextBox
                     name: rob_4
-                    format: number
+                    format: string
           - type: CollapseBox
             collapsed: true
             label: 8. Methodological quality of the meta-analysis
@@ -170,16 +170,16 @@ children:
                 children:
                   - type: TextBox
                     name: amstar_1
-                    format: number
+                    format: string
                   - type: TextBox
                     name: amstar_2
-                    format: number
+                    format: string
                   - type: TextBox
                     name: amstar_3
-                    format: number
+                    format: string
                   - type: TextBox
                     name: amstar_4
-                    format: number
+                    format: string
           - type: CollapseBox
             collapsed: true
             label: 9. Publication bias
@@ -189,35 +189,35 @@ children:
                 children:
                   - type: TextBox
                     name: egger_p_1
-                    format: number
+                    format: string
                   - type: TextBox
                     name: egger_p_2
-                    format: number
+                    format: string
                   - type: TextBox
                     name: egger_p_3
-                    format: number
+                    format: string
                   - type: TextBox
                     name: egger_p_4
-                    format: number
+                    format: string
           - type: CollapseBox
             collapsed: true
-            label: 10. Excess of significance
+            label: 10. Excess of statistical significance
             children:
               - type: LayoutBox
                 margin: large
                 children:
                   - type: TextBox
                     name: esb_p_1
-                    format: number
+                    format: string
                   - type: TextBox
                     name: esb_p_2
-                    format: number
+                    format: string
                   - type: TextBox
                     name: esb_p_3
-                    format: number
+                    format: string
                   - type: TextBox
                     name: esb_p_4
-                    format: number
+                    format: string
           - type: CollapseBox
             collapsed: true
             label: 11. P-value of the Jackknife meta-analysis
@@ -227,16 +227,16 @@ children:
                 children:
                   - type: TextBox
                     name: JK_p_1
-                    format: number
+                    format: string
                   - type: TextBox
                     name: JK_p_2
-                    format: number
+                    format: string
                   - type: TextBox
                     name: JK_p_3
-                    format: number
+                    format: string
                   - type: TextBox
                     name: JK_p_4
-                    format: number
+                    format: string
           - type: CollapseBox
             collapsed: true
             label: 12. 95 prediction interval
@@ -277,9 +277,15 @@ children:
         children:
           - type: ComboBox
             name: method.var
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: TextBox
+            name: pre_post_cor
+            format: number
   - type: CollapseBox
     collapsed: true
-    label: Excess significance bias
+    label: Excess of statistical significance
     margin: large
     children:
       - type: LayoutBox
@@ -287,6 +293,11 @@ children:
         children:
           - type: ComboBox
             name: true_effect
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: ComboBox
+            name: method.esb
   - type: CollapseBox
     collapsed: true
     label: Multivariate datasets
@@ -374,4 +385,4 @@ children:
                 format: number
               - type: TextBox
                 name: max_x
-                format: number
+                format: string

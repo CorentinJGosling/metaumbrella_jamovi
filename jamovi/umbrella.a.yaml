@@ -42,7 +42,16 @@ options:
           name:  ML
         - title: PM
           name:  PM
+        - title: FE
+          name:  FE
       default: REML
+      
+    - name: pre_post_cor
+      type: Number
+      title: Pre/post correlation (needed for SMC measure)
+      min: 0
+      max: 1
+      default: 0.8
       
     - name: true_effect
       title: Best approximation of the 'true' effect
@@ -53,7 +62,23 @@ options:
         - title: pooled
           name:  pooled
       default: largest
-
+      
+    - name: method.esb
+      title: Method to conduct the excess statistical signifiance
+      type: List
+      options:
+        - title: IT.binom
+          name:  IT.binom
+        - title: IT.chisq
+          name:  IT.chisq
+        - title: TESS
+          name:  TESS
+        - title: PSST
+          name:  PSST
+        - title: TESSPSST
+          name:  TESSPSST
+      default: TESSPSST
+      
     - name: mult.level
       title: Check the box if at least one factor has a multivariate structure
       type: Bool
@@ -64,238 +89,150 @@ options:
       title: Indicate the strength of the within-study correlation between the outcomes
       min: 0
       max: 1
-      default: 0.5
+      default: 0.8
 
     - name: n_studies_1
-      type: Number
+      type: String 
       title: "Class I cut-off:"
-      min: -9999
-      default: -9999
     - name: n_studies_2
-      type: Number
+      type: String 
       title: "Class II cut-off:"
-      min: -9999
-      default: -9999
     - name: n_studies_3
-      type: Number
+      type: String 
       title: "Class III cut-off:"
-      min: -9999
-      default: -9999
     - name: n_studies_4
-      type: Number
+      type: String 
       title: "Class IV cut-off:"
-      min: -9999
-      default: -9999
 
     - name: total_n_1
-      type: Number
+      type: String
       title: "Class I cut-off:"
-      min: -9999
-      default: -9999
     - name: total_n_2
-      type: Number
+      type: String
       title: "Class II cut-off:"
-      min: -9999
-      default: -9999
     - name: total_n_3
-      type: Number
+      type: String
       title: "Class III cut-off:"
-      min: -9999
-      default: -9999
     - name: total_n_4
-      type: Number
+      type: String
       title: "Class IV cut-off:"
-      min: -9999
-      default: -9999
 
     - name: n_cases_1
-      type: Number
+      type: String
       title: "Class I cut-off:"
-      min: -9999
-      default: -9999
     - name: n_cases_2
-      type: Number
+      type: String
       title: "Class II cut-off:"
-      min: -9999
-      default: -9999
     - name: n_cases_3
-      type: Number
+      type: String
       title: "Class III cut-off:"
-      min: -9999
-      default: -9999
     - name: n_cases_4
-      type: Number
+      type: String
       title: "Class IV cut-off:"
-      min: -9999
-      default: -9999
-      
+
     - name: p_value_1
-      type: Number
+      type: String
       title: "Class I cut-off:"
-      min: -9999
-      default: -9999
     - name: p_value_2
-      type: Number
+      type: String
       title: "Class II cut-off:"
-      min: -9999
-      default: -9999
     - name: p_value_3
-      type: Number
+      type: String
       title: "Class III cut-off:"
-      min: -9999
-      default: -9999
     - name: p_value_4
-      type: Number
+      type: String
       title: "Class IV cut-off:"
-      min: -9999
-      default: -9999
-      
+
     - name: I2_1
-      type: Number
+      type: String
       title: "Class I cut-off:"
-      min: -9999
-      default: -9999
     - name: I2_2
-      type: Number
+      type: String
       title: "Class II cut-off:"
-      min: -9999
-      default: -9999
     - name: I2_3
-      type: Number
+      type: String
       title: "Class III cut-off:"
-      min: -9999
-      default: -9999
     - name: I2_4
-      type: Number
+      type: String
       title: "Class IV cut-off:"
-      min: -9999
-      default: -9999
 
     - name: imprecision_1
-      type: Number
+      type: String
       title: "Class I cut-off:"
-      min: -9999
-      default: -9999
     - name: imprecision_2
-      type: Number
+      type: String
       title: "Class II cut-off:"
-      min: -9999
-      default: -9999
     - name: imprecision_3
-      type: Number
+      type: String
       title: "Class III cut-off:"
-      min: -9999
-      default: -9999
     - name: imprecision_4
-      type: Number
+      type: String
       title: "Class IV cut-off:"
-      min: -9999
-      default: -9999
 
     - name: rob_1
-      type: Number
+      type: String
       title: "Class I cut-off:"
-      min: -9999
-      default: -9999
     - name: rob_2
-      type: Number
+      type: String
       title: "Class II cut-off:"
-      min: -9999
-      default: -9999
     - name: rob_3
-      type: Number
+      type: String
       title: "Class III cut-off:"
-      min: -9999
-      default: -9999
     - name: rob_4
-      type: Number
+      type: String
       title: "Class IV cut-off:"
-      min: -9999
-      default: -9999
 
     - name: amstar_1
-      type: Number
+      type: String
       title: "Class I cut-off:"
-      min: -9999
-      default: -9999
     - name: amstar_2
-      type: Number
+      type: String
       title: "Class II cut-off:"
-      min: -9999
-      default: -9999
     - name: amstar_3
-      type: Number
+      type: String
       title: "Class III cut-off:"
-      min: -9999
-      default: -9999
     - name: amstar_4
-      type: Number
+      type: String
       title: "Class IV cut-off:"
-      min: -9999
-      default: -9999
 
     - name: egger_p_1
-      type: Number
+      type: String
       title: "Class I cut-off:"
-      min: -9999
-      default: -9999
     - name: egger_p_2
-      type: Number
+      type: String
       title: "Class II cut-off:"
-      min: -9999
-      default: -9999
     - name: egger_p_3
-      type: Number
+      type: String
       title: "Class III cut-off:"
-      min: -9999
-      default: -9999
     - name: egger_p_4
-      type: Number
+      type: String
       title: "Class IV cut-off:"
-      min: -9999
-      default: -9999
 
     - name: esb_p_1
-      type: Number
+      type: String
       title: "Class I cut-off:"
-      min: -9999
-      default: -9999
     - name: esb_p_2
-      type: Number
+      type: String
       title: "Class II cut-off:"
-      min: -9999
-      default: -9999
     - name: esb_p_3
-      type: Number
+      type: String
       title: "Class III cut-off:"
-      min: -9999
-      default: -9999
     - name: esb_p_4
-      type: Number
+      type: String
       title: "Class IV cut-off:"
-      min: -9999
-      default: -9999
 
     - name: JK_p_1
-      type: Number
+      type: String
       title: "Class I cut-off:"
-      min: -9999
-      default: -9999
     - name: JK_p_2
-      type: Number
+      type: String
       title: "Class II cut-off:"
-      min: -9999
-      default: -9999
     - name: JK_p_3
-      type: Number
+      type: String
       title: "Class III cut-off:"
-      min: -9999
-      default: -9999
     - name: JK_p_4
-      type: Number
+      type: String
       title: "Class IV cut-off:"
-      min: -9999
-      default: -9999
 
     - name: pi_1
       type: Bool
@@ -330,6 +267,7 @@ options:
       type: Bool
       default: false
       title: "If ticked, prevents Class IV to be reached when p-value of the largest study is >= .05"
+      
     - name: measure_forest
       title: Meeasure used
       type: List
@@ -339,6 +277,7 @@ options:
         - title: eOR
           name:  eOR
       default: eG
+      
     - name: class_forest
       title: Select lowest class displayed in the plot
       type: List
@@ -360,37 +299,43 @@ options:
         - title: Low
           name:  Low
       default: no_rest
+      
     - name: title_forest
       title: Title of the plot
       type: String
+      
     - name: title_xaxis
       title: Title of the x-axis
       type: String
+      
     - name: cex
       type: Number
       title: Police size
       min: 0
       default: 1
+      
     - name: cex_dot
       type: Number
       title: Dot size
       min: 0
       default: 1
+      
     - name: x_lim_adj
       type: Number
       title: Width 
       default: 0
+      
     - name: y_lim_adj
       type: Number
       title: Height
       default: 0
+      
     - name: max_x
-      type: Number
-      title: x-axis limits
-      default: -9999
+      type: String
+      title: Limits of the x-axis
+      
     - name: x_axis_adj
       type: Number
-      title: Position x-axis
+      title: Position of the x-axis
       default: 0
-
 ...

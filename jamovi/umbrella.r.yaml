@@ -4,6 +4,26 @@ title: 'Results of the umbrella review'
 jrs:   '1.1'
 
 items:
+    
+    - name:  text
+      type:  Preformatted
+
+    - name:  checktable
+      title:  List of problematic rows (if any)
+      type: Table
+      rows:  1
+      columns:
+        - name: Row
+          type: text
+        - name: Type_errors
+          type: text
+        - name: Description_errors
+          type: text
+        - name: author
+          type: text
+        - name: year
+          type: text
+    
     - name:  strattable
       title:  Summary results
       type: Table
@@ -81,8 +101,8 @@ items:
     - name: plot
       title: Forest Plot
       type: Image
-      width:  1000
-      height: 1000
+      width:  100
+      height: 100
       renderFun: .plot
 
 ...

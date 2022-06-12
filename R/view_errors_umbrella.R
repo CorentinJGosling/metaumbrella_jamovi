@@ -56,7 +56,6 @@ view.errors.umbrella <- function(data, return = "data_and_messages") {
                      "data_and_message")) {
     stop("The return value should be either 'messages', 'data' or 'data_and_messages'.")
   }
-
   checkings <- .check_data(data)
 
   if (return %in% c("message", "messages")) {
