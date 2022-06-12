@@ -247,12 +247,16 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
                 maxvalue <- as.numeric(as.character(self$options$max_x))
                 if (self$options$class_forest == "no_rest") {
                     class_restrict <- c("I", "II", "III", "IV", "V", "ns", "High", "Moderate", "Weak", "Very weak")
+                } else if (self$options$class_forest == "I") {
+                    class_restrict <- "I"
                 } else if (self$options$class_forest == "II") {
                     class_restrict <- c("I", "II")
                 } else if (self$options$class_forest == "III") {
-                    class_restrict <- c("I", "III")
+                    class_restrict <- c("I", "II", "III")
                 } else if (self$options$class_forest == "IV") {
-                    class_restrict <- c("I", "III", "IV")
+                    class_restrict <- c("I", "II", "III", "IV")
+                } else if (self$options$class_forest == "High") {
+                    class_restrict <- "High"
                 } else if (self$options$class_forest == "Moderate") {
                     class_restrict <- c("High", "Moderate")
                 } else if (self$options$class_forest == "Weak") {
