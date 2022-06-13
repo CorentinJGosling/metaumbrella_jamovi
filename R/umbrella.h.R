@@ -74,7 +74,7 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             cex_dot = 1,
             x_lim_adj = 0,
             y_lim_adj = 0,
-            max_x = NULL,
+            max_x = 2,
             x_axis_adj = 0, ...) {
 
             super$initialize(
@@ -321,7 +321,7 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "IV",
                     "High",
                     "Moderate",
-                    "Low"),
+                    "Weak"),
                 default="no_rest")
             private$..title_forest <- jmvcore::OptionString$new(
                 "title_forest",
@@ -347,9 +347,10 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 "y_lim_adj",
                 y_lim_adj,
                 default=0)
-            private$..max_x <- jmvcore::OptionString$new(
+            private$..max_x <- jmvcore::OptionNumber$new(
                 "max_x",
-                max_x)
+                max_x,
+                default=2)
             private$..x_axis_adj <- jmvcore::OptionNumber$new(
                 "x_axis_adj",
                 x_axis_adj,
@@ -717,8 +718,8 @@ umbrellaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 name="plot",
                 title="Forest Plot",
-                width=100,
-                height=100,
+                width=900,
+                height=900,
                 renderFun=".plot"))}))
 
 umbrellaBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
@@ -729,7 +730,7 @@ umbrellaBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "metaumbrella",
                 name = "umbrella",
-                version = c(1,0,0),
+                version = c(1,0,5),
                 options = options,
                 results = umbrellaResults$new(options=options),
                 data = data,

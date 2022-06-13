@@ -224,70 +224,59 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
                 }
                 table3$setNote(key = "4", note = c("PI = 95% prediction interval", "z"))
                 table3$setNote(key = "5", note = "egger_p = p-value at the Egger's test")
-                table3$setNote(key = "6", note = "ESB_p = p-value at the Excess of Significance Bias test")
-                table3$setNote(key = "7", note = "power_med = power of provided by the sample size in the meta-analysis to detect a medium effect size (SMD = 0.50)")
+                table3$setNote(key = "6", note = "ESB_p = p-value at the excess of significance bias test")
+                table3$setNote(key = "7", note = "power_med = power provided by the sample size in the meta-analysis to detect a medium effect size (SMD = 0.50)")
                 table3$setNote(key = "8", note = "JK_p = largest p-value obtained in the Jackknife meta-analysis")
                 table3$setNote(key = "9", note = "largest_CI = 95% CI of the largest study")
                 
                 plotData <- evid
                 image <- self$results$plot
                 image$setState(plotData)
-            
+            }
+        },
             .plot = function(image, ...) {
-                # even this code is leading to a failure
-                # ------------------
-                # plot(rnorm(10))  
-                # TRUE              
-                # }                
-                # ------------------
-              
-                plotData <- image$state
-                title <- ifelse(is.null(self$options$title_forest), "", self$options$title_forest)
-                title_xaxis <- ifelse(is.null(self$options$title_xaxis), NA, self$options$title_xaxis)
-                maxvalue <- as.numeric(as.character(self$options$max_x))
-                if (self$options$class_forest == "no_rest") {
-                    class_restrict <- c("I", "II", "III", "IV", "V", "ns", "High", "Moderate", "Weak", "Very weak")
-                } else if (self$options$class_forest == "I") {
-                    class_restrict <- "I"
-                } else if (self$options$class_forest == "II") {
-                    class_restrict <- c("I", "II")
-                } else if (self$options$class_forest == "III") {
-                    class_restrict <- c("I", "II", "III")
-                } else if (self$options$class_forest == "IV") {
-                    class_restrict <- c("I", "II", "III", "IV")
-                } else if (self$options$class_forest == "High") {
-                    class_restrict <- "High"
-                } else if (self$options$class_forest == "Moderate") {
-                    class_restrict <- c("High", "Moderate")
-                } else if (self$options$class_forest == "Weak") {
-                    class_restrict <- c("High", "Moderate", "Weak")
-                }
-                forest.umbrella(x = plotData,
-                measure = self$options$measure_forest,
-                max.value = maxvalue,
-                main_title = title,
-                main_x_axis = title_xaxis,
-                print.classes = class_restrict,
-                cex_title = self$options$cex + 0.4,
-                cex_text_header = self$options$cex,
-                cex_text = self$options$cex - 0.1,
-                cex_value_header = self$options$cex,
-                cex_value = self$options$cex - 0.1,
-                cex_x_axis = self$options$cex + 0.1,
-                cex_x_axis_value = self$options$cex - 0.2,
-                cex_dots = self$options$cex_dot + 0.2,
-                x_lim_adj = self$options$x_lim_adj,
-                y_lim_adj = self$options$y_lim_adj,
-                x_axis_adj = self$options$x_axis_adj
-                )
-                TRUE
+              if (!is.null(image$state)) {
+                  plotData <- image$state
+                  title <- ifelse(is.null(self$options$title_forest), "", self$options$title_forest)
+                  title_xaxis <- ifelse(is.null(self$options$title_xaxis), NA, self$options$title_xaxis)
+                  if (self$options$class_forest == "no_rest") {
+                      class_restrict <- c("I", "II", "III", "IV", "V", "ns", "High", "Moderate", "Weak", "Very weak")
+                  } else if (self$options$class_forest == "I") {
+                      class_restrict <- "I"
+                  } else if (self$options$class_forest == "II") {
+                      class_restrict <- c("I", "II")
+                  } else if (self$options$class_forest == "III") {
+                      class_restrict <- c("I", "II", "III")
+                  } else if (self$options$class_forest == "IV") {
+                      class_restrict <- c("I", "II", "III", "IV")
+                  } else if (self$options$class_forest == "High") {
+                      class_restrict <- "High"
+                  } else if (self$options$class_forest == "Moderate") {
+                      class_restrict <- c("High", "Moderate")
+                  } else if (self$options$class_forest == "Weak") {
+                      class_restrict <- c("High", "Moderate", "Weak")
+                  }
+                  forest.umbrella(x = plotData,
+                                  measure = self$options$measure_forest,
+                                  max.value = self$options$max_x,
+                                  main_title = title,
+                                  main_x_axis = title_xaxis,
+                                  print.classes = class_restrict,
+                                  cex_title = self$options$cex + 0.4,
+                                  cex_text_header = self$options$cex,
+                                  cex_text = self$options$cex - 0.1,
+                                  cex_value_header = self$options$cex,
+                                  cex_value = self$options$cex - 0.1,
+                                  cex_x_axis = self$options$cex + 0.1,
+                                  cex_x_axis_value = self$options$cex - 0.2,
+                                  cex_dots = self$options$cex_dot + 0.2,
+                                  x_lim_adj = self$options$x_lim_adj,
+                                  y_lim_adj = self$options$y_lim_adj,
+                                  x_axis_adj = self$options$x_axis_adj)
+                  TRUE
+              }
             }
-            
-            }
-            
-        }
-        
-        )
+    )
 )
 
 

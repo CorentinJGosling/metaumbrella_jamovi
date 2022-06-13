@@ -23,7 +23,7 @@ analyses:
   - title: Umbrella review
     name: umbrella
     ns: metaumbrella
-    menuGroup: metaumbrella_jmv
+    menuGroup: metaumbrella
     menuTitle: Umbrella review
 usesNative: true
 minApp: 1.0.8

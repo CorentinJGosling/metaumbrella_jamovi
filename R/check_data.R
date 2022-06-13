@@ -19,7 +19,7 @@
   # } else if (nrow(x) == 0) {
   #   stop("Dataframe passed to the umbrella() function has no row. Check format of the dataset.")
   # }
-  # JAMOVI
+  ####JAMOVI
   if (length(colnames(x)) == 0 | nrow(x) == 0) {
     stop("No dataset detected. Load (or reload) your dataset and drag-and-drop appropriate column names to the 'List of variables' selector.")
   }

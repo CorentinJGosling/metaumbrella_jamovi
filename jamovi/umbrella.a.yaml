@@ -1,8 +1,8 @@
 ---
 name:  umbrella
 title: 'Umbrella review'
-menuGroup: metaumbrella_jmv
-version: '1.0.0'
+menuGroup: metaumbrella
+version: '1.0.5'
 jas: '1.2'
 export: false
 
@@ -296,8 +296,8 @@ options:
           name:  High
         - title: Moderate
           name:  Moderate
-        - title: Low
-          name:  Low
+        - title: Weak
+          name:  Weak
       default: no_rest
       
     - name: title_forest
@@ -331,9 +331,10 @@ options:
       default: 0
       
     - name: max_x
-      type: String
+      type: Number
       title: Limits of the x-axis
-      
+      default: 2
+
     - name: x_axis_adj
       type: Number
       title: Position of the x-axis

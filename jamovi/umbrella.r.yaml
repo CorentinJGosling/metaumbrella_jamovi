@@ -101,8 +101,8 @@ items:
     - name: plot
       title: Forest Plot
       type: Image
-      width:  100
-      height: 100
+      width: 900
+      height: 900
       renderFun: .plot
 
 ...

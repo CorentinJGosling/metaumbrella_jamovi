@@ -385,4 +385,4 @@ children:
                 format: number
               - type: TextBox
                 name: max_x
-                format: string
+                format: number
