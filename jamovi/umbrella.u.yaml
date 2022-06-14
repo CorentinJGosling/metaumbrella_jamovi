@@ -16,6 +16,53 @@ children:
             isTarget: true
   - type: CollapseBox
     collapsed: true
+    label: Meta-analytic models
+    margin: large
+    children:
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: ComboBox
+            name: method.var
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: TextBox
+            name: pre_post_cor
+            format: number
+  - type: CollapseBox
+    collapsed: true
+    label: Excess of statistical significance
+    margin: large
+    children:
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: ComboBox
+            name: true_effect
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: ComboBox
+            name: method.esb
+  - type: CollapseBox
+    collapsed: true
+    label: Multivariate datasets
+    margin: large
+    children:
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: CheckBox
+            name: mult.level
+      - type: LayoutBox
+        margin: large
+        children:
+          - type: TextBox
+            name: r
+            format: number
+  - type: CollapseBox
+    collapsed: true
     label: Stratification of the evidence
     margin: large
     children:
@@ -267,53 +314,6 @@ children:
                     name: largest_CI_3
                   - type: CheckBox
                     name: largest_CI_4
-  - type: CollapseBox
-    collapsed: true
-    label: Meta-analytic model
-    margin: large
-    children:
-      - type: LayoutBox
-        margin: large
-        children:
-          - type: ComboBox
-            name: method.var
-      - type: LayoutBox
-        margin: large
-        children:
-          - type: TextBox
-            name: pre_post_cor
-            format: number
-  - type: CollapseBox
-    collapsed: true
-    label: Excess of statistical significance
-    margin: large
-    children:
-      - type: LayoutBox
-        margin: large
-        children:
-          - type: ComboBox
-            name: true_effect
-      - type: LayoutBox
-        margin: large
-        children:
-          - type: ComboBox
-            name: method.esb
-  - type: CollapseBox
-    collapsed: true
-    label: Multivariate datasets
-    margin: large
-    children:
-      - type: LayoutBox
-        margin: large
-        children:
-          - type: CheckBox
-            name: mult.level
-      - type: LayoutBox
-        margin: large
-        children:
-          - type: TextBox
-            name: r
-            format: number
   - type: CollapseBox
     collapsed: true
     label: Forest plot

@@ -272,7 +272,7 @@ brewin 2000	Psychotic disorder	north	1994	outcomes	OR	2.45			19	54	17	56								
 brewin 2000	Psychotic disorder	north	1994	outcomes	OR	1			12	51	18	45									4
 visser 2017	Psychotic disorder	o'donnell	2004		OR	4.72	1.84	12.1078260869565	13	244											4
 brewin 2000	Psychotic disorder	pitman	1991		OR	1.39			40	61	15	86	8	32	7	54					4
-grekin 2014	Psychotic disorder	seng	2013		OR	1	1	1	9	557	18	548	0	9	18	539					4
+grekin 2014	Psychotic disorder	seng	2013		OR				9	557	18	548	0	9	18	539					4
 brewin 2000	Psychotic disorder	speed	1989		OR	1.49			31	31	6	56	2	29	4	27					4
 davydow 2015	Psychotic disorder	stukas	2009		OR	3.04			53	247	95	205	30	23	65	182					4
 brewin 2000	Psychotic disorder	ursano	1999		OR	6.4	2.01	20.41	18	81	17	82	8	10	9	72					4

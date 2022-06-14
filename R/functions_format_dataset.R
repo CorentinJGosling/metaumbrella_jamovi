@@ -189,7 +189,7 @@
     x_i$all_vals_study = paste0("study: '", x_i$author, " (", x_i$year, ")' contains multiple ", x_i$multiple_es)
 
     if (mult.level == FALSE) {
-      stop(paste(paste(unique(x_i$all_vals_study[x_i$duplicate == TRUE]), collapse = " / "), " and is repeated several times in your dataset. \nPlease, check that it is not a repeated entry. If not, indicate that you have multivariate data by specfying 'mult.level = TRUE' as an argument of the 'umbrella' function."))
+      stop(paste(paste(unique(x_i$all_vals_study[x_i$duplicate == TRUE]), collapse = " / "), " and is repeated several times in your dataset. \nPlease, check that it is not a repeated entry. If not, indicate that you have multivariate data by checking the appropriate box in the 'Multivariate datasets' section."))
     }
     if (r > 1 | r < -1) {
       stop("The r argument of the umbrella function (the r value that will be applied to aggregate studies with multiple outcomes) must be within the range of [-1; 1].")
