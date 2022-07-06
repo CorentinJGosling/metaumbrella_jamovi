@@ -51,7 +51,7 @@ options:
       title: Pre/post correlation (needed for SMC measure)
       min: 0
       max: 1
-      default: 0.8
+      default: 0.5
       
     - name: true_effect
       title: Best approximation of the 'true' effect
@@ -61,6 +61,8 @@ options:
           name:  largest
         - title: pooled
           name:  pooled
+        - title: UWLS
+          name:  UWLS
       default: largest
       
     - name: method.esb
@@ -269,7 +271,7 @@ options:
       title: "If ticked, prevents Class IV to be reached when p-value of the largest study is >= .05"
       
     - name: measure_forest
-      title: Meeasure used
+      title: Measure used
       type: List
       options:
         - title: eG

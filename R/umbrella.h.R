@@ -117,7 +117,8 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 true_effect,
                 options=list(
                     "largest",
-                    "pooled"),
+                    "pooled",
+                    "UWLS"),
                 default="largest")
             private$..method.esb <- jmvcore::OptionList$new(
                 "method.esb",

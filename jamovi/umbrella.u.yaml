@@ -17,15 +17,12 @@ children:
   - type: CollapseBox
     collapsed: true
     label: Meta-analytic models
-    margin: large
     children:
       - type: LayoutBox
-        margin: large
         children:
           - type: ComboBox
             name: method.var
       - type: LayoutBox
-        margin: large
         children:
           - type: TextBox
             name: pre_post_cor
@@ -33,22 +30,18 @@ children:
   - type: CollapseBox
     collapsed: true
     label: Excess of statistical significance
-    margin: large
     children:
       - type: LayoutBox
-        margin: large
         children:
           - type: ComboBox
             name: true_effect
       - type: LayoutBox
-        margin: large
         children:
           - type: ComboBox
             name: method.esb
   - type: CollapseBox
     collapsed: true
     label: Multivariate datasets
-    margin: large
     children:
       - type: LayoutBox
         margin: large
@@ -64,10 +57,8 @@ children:
   - type: CollapseBox
     collapsed: true
     label: Stratification of the evidence
-    margin: large
     children:
       - type: LayoutBox
-        margin: large
         children:
           - type: ComboBox
             name: criteria
@@ -80,7 +71,6 @@ children:
             label: 1. Number of studies
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: TextBox
                     name: n_studies_1
@@ -99,7 +89,6 @@ children:
             label: 2. Total number of participants
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: TextBox
                     name: total_n_1
@@ -118,7 +107,6 @@ children:
             label: 3. Number of cases
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: TextBox
                     name: n_cases_1
@@ -137,7 +125,6 @@ children:
             label: 4. P-value of the random-effects meta-analysis
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: TextBox
                     name: p_value_1
@@ -156,7 +143,6 @@ children:
             label: 5. Inconsistency
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: TextBox
                     name: I2_1
@@ -175,7 +161,6 @@ children:
             label: 6. Imprecision
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: TextBox
                     name: imprecision_1
@@ -194,7 +179,6 @@ children:
             label: 7. Risk of bias of individual studies
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: TextBox
                     name: rob_1
@@ -213,7 +197,6 @@ children:
             label: 8. Methodological quality of the meta-analysis
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: TextBox
                     name: amstar_1
@@ -232,7 +215,6 @@ children:
             label: 9. Publication bias
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: TextBox
                     name: egger_p_1
@@ -251,7 +233,6 @@ children:
             label: 10. Excess of statistical significance
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: TextBox
                     name: esb_p_1
@@ -270,7 +251,6 @@ children:
             label: 11. P-value of the Jackknife meta-analysis
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: TextBox
                     name: JK_p_1
@@ -289,7 +269,6 @@ children:
             label: 12. 95 prediction interval
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: CheckBox
                     name: pi_1
@@ -304,7 +283,6 @@ children:
             label: 13. Significance largest study
             children:
               - type: LayoutBox
-                margin: large
                 children:
                   - type: CheckBox
                     name: largest_CI_1
@@ -317,7 +295,6 @@ children:
   - type: CollapseBox
     collapsed: true
     label: Forest plot
-    margin: large
     children:
       - type: LayoutBox
         margin: large
@@ -363,7 +340,6 @@ children:
         margin: large
         children:
           - type: LayoutBox
-            margin: large
             children:
               - type: Label
                 label: Size of elements

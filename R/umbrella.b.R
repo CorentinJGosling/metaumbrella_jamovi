@@ -222,7 +222,7 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
                         )
                     }
                 }
-                table3$setNote(key = "4", note = c("PI = 95% prediction interval", "z"))
+                table3$setNote(key = "4", note = c("PI = 95% prediction interval"))
                 table3$setNote(key = "5", note = "egger_p = p-value at the Egger's test")
                 table3$setNote(key = "6", note = "ESB_p = p-value at the excess of significance bias test")
                 table3$setNote(key = "7", note = "power_med = power provided by the sample size in the meta-analysis to detect a medium effect size (SMD = 0.50)")

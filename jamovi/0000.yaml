@@ -25,6 +25,31 @@ analyses:
     ns: metaumbrella
     menuGroup: metaumbrella
     menuTitle: Umbrella review
+datasets:
+  - name: df.radua2019
+    path: df.radua2019.txt
+    description: Datasets inspired from a real umbrella review
+    tags:
+      - 'OR, SMD, RR, HR'
+      - Multivariate situations
+  - name: df.HR
+    path: df.HR.txt
+    description: Fictitious datasets with HR effect size measure
+    tags:
+      - Hazard Ratio
+      - No multivariate
+  - name: df.RR
+    path: df.RR.txt
+    description: Fictitious datasets with RR effect size measure
+    tags:
+      - Risk Ratio
+      - No multivariate
+  - name: df.SMD
+    path: df.SMD.txt
+    description: Fictitious datasets with SMD effect size measure
+    tags:
+      - Standardized mean difference
+      - No multivariate
 usesNative: true
 minApp: 1.0.8
 

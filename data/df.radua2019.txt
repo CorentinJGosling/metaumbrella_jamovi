@@ -1,0 +1,279 @@
+meta_review	factor	author	year	multiple_es	measure	value	ci_lo	ci_up	n_cases	n_controls	n_exp	n_nexp	n_cases_exp	n_cases_nexp	n_controls_exp	n_controls_nexp	mean_cases	sd_cases	mean_controls	sd_controls	amstar
+siskind 2016	Age	adams	2006		OR				67	1614	215	1466	1	66	214	1400					5
+tang 2017	Age	altindag	2005		OR				18	60	4	74	2	16	2	58					5
+cnossen 2017	Age	alway	2016		SMD				15	70							35.2	14.88	35.91	16.91	5
+tang 2017	Age	armenian	2000		OR				138	546	69	615	16	122	53	493					5
+brewin 2000	Age	blanchard	1996		SMD				62	51							34.8	11.2	36.2	14.7	5
+visser 2017	Age	blanchard	1997		SMD				55	47							35.4	11.5	36.7	15.1	5
+brewin 2000	Age	bremner	1993		SMD				38	28							47.3	2.7	46.6	2.8	5
+brewin 2000	Age	brent	1995		SMD				8	138							20.1	1.5	18.2	2	5
+brewin 2000	Age	bryant	1996		SMD				11	14							30.55	14.22	38.85	16.69	5
+visser 2017	Age	bryant	2000		SMD				24	89							33	12.1	29.9	12.2	5
+visser 2017	Age	bryant	2013		OR				100	730	495	335	54	46	441	289					5
+cnossen 2017	Age	bryant, marosszeky	2000		SMD				26	70							34.63	13.35	34.16	12.72	5
+cnossen 2017	Age	caspi	2005		SMD				22	98							35	2.3	35.9	2.7	5
+tang 2017	Age	chen	2012		OR				65	222	28	259	11	54	17	205					5
+tang 2017	Age	chou	2007		OR	0.98	0.902	1.06474501108647	9	207											5
+brewin 2000	Age	difede	1999		SMD				17	14							42	16	43	12	5
+xue 2015	Age	dohrenwend	2008		OR				28	217	33	212	1	27	32	185					5
+tang 2017	Age	eksi	2007		SMD	0.87			96	64							14.31		14.73		5
+giannoni-pastor 2016	Age	el hamaoui	2002		SMD				14	46							18.8	8.5	25.5	9	5
+visser 2017	Age	freedman	1999		SMD				12	37							28.1	10.7	28.4	9.9	5
+siskind 2016	Age	galea	2002		OR	0.37	0.134589502018843	1.04166666666667	86	902	106	882	4	82	102	800					5
+tang 2017	Age	gigantesco	2013		OR				39	918	370	587	20	19	350	568					5
+visser 2017	Age	gil, caspi et al.	2005		SMD				17	103							33.8	3.1	31	2.3	5
+visser 2017	Age	holbrook	2001		SMD				261	563							34.3	12.3	37.4	15.9	5
+brewin 2000	Age	kilpatrick	1989		SMD				82	212							36.4	11.6	43.3	13.8	5
+xue 2015	Age	koenen	2002		OR	1.04	1.02040816326531	1.059968	568	2140											5
+tang 2017	Age	lee	2009		OR	1.8	1	3.2	76	120	105	91	48	28	57	63					5
+siskind 2016	Age	livingston	1992		OR	0.1	0.00516342231631125	1.88679245283019	50	5	31	24	26	24	5	0					5
+brewin 2000	Age	macklin	1998		SMD				59	50							49	2.4	50	2.9	5
+brewin 2000	Age	mcfarlane	1988		SMD				11	3							39.4	6.5	32.8	8.5	5
+siskind 2016	Age	miguel-tobal	2006		OR	0.07	0.0104580631667015	0.468538	34	1555	427	1162	1	33	426	1129					5
+brewin 2000	Age	reich	1996		SMD				53	29							57.5	12.1	55.3	13.1	5
+brewin 2000	Age	riggs	1992		SMD				44	42							31.63	8.93	31.5	12.72	5
+davydow 2015	Age	rothenhausler	2002		SMD				4	58							44.5	9.9	55	11.1	5
+brewin 2000	Age	schnurr	1993		SMD				10	56							39.2	1.9	40	2.1	5
+brewin 2000	Age	shalev	1996		SMD				13	38							35.4	17.4	35.2	13.3	5
+brewin 2000	Age	shalev	1997		SMD				35	172							27.5	10.5	29.3	10.9	5
+visser 2017	Age	shalev  terrorism	2005		SMD				14	25							35.64	13.49	27.36	10.48	5
+xue 2015	Age	shea	2013		SMD				30	208							34.7	9.4	33.3	9.5	5
+brewin 2000	Age	speed	1989		SMD				31	31							23.3	7.7	24.6	6.4	5
+brewin 2000	Age	sutker	1990		SMD				131	62							63.9	4.8	65.9	3.6	5
+tang 2017	Age	tian	2014		OR	0.96	0.854	1.082	261	4343											5
+brewin 2000	Age	vasterling	1997		SMD				18	23							45.6	19.2	34.8	8.4	5
+parker 2016	Age	viswanath	2012		OR				49	389	75	363	10	39	65	324					5
+parker 2016	Age	yang	2003		OR	0.13	0.0583771161704612	0.289497	46	384	203	227	39	7	164	220					5
+tang 2017	Age	zhou	2013		OR				2028	12179	7835	6372	1013	1015	6822	5357					5
+steel 2009	Cumulative trauma	basoglu	2005		OR	2.59	1.99	3.38	292	1066											8
+steel 2009	Cumulative trauma	cheung	1994		RR	1.45	1.224	1.71772875816993	27	196											8
+steel 2009	Cumulative trauma	de jong	2001	groups	RR	3.14	1.8	5.47755555555556	244	409	600	53	237	7	363	46					8
+steel 2009	Cumulative trauma	de jong	2001	groups	RR	3.52	1.79	6.92201117318436	173	437	494	116	165	8	329	108					8
+steel 2009	Cumulative trauma	de jong	2001	groups	RR	4.53	2.48	8.27455645161291	190	1010	944	256	179	11	765	245					8
+steel 2009	Cumulative trauma	de jong	2001	groups	RR	10.03	5.26	19.1256463878327	104	481	347	238	97	7	250	231					8
+steel 2009	Cumulative trauma	hashemian	2006		OR				6	96	51	51	6	0	45	51					8
+steel 2009	Cumulative trauma	hauff	1994		OR	0.35			13	113	15	111	7	6	8	105					8
+steel 2009	Cumulative trauma	johnson	2008		OR	2.67	1.88	3.79	718	943	293	1368	200	518	93	850					8
+steel 2009	Cumulative trauma	obilom	2008		OR				114	164	63	215	26	88	37	127					8
+steel 2009	Cumulative trauma	renner	2006		OR				38	112	77	73	32	6	45	67					8
+steel 2009	Cumulative trauma	seino	2008		OR				349	823	555	617	290	59	265	558					8
+steel 2009	Cumulative trauma	zlotnick	2006		OR	3.8	1.4	10.4	115	918	300	733									8
+brewin 2000	Ethnic minority	acierno	1999	groups	OR	1			94	369	92	371	18	76	74	295					5
+brewin 2000	Ethnic minority	acierno	1999	groups	OR	1.04			89	516	102	503	14	75	88	428					5
+brewin 2000	Ethnic minority	blanchard	1996		OR	1.67			62	51	60	53	12	50	48	3					5
+visser 2017	Ethnic minority	blanchard	1997		OR				55	47	12	90	9	46	3	44					5
+brewin 2000	Ethnic minority	bremner	1993		OR	1.49			38	28	10	56	4	34	6	22					5
+brewin 2000	Ethnic minority	brent	1995		OR	1			8	138	4	142	0	8	4	134					5
+brewin 2000	Ethnic minority	breslau	1991		OR	0.83			93	301	81	313	17	76	64	237					5
+brewin 2000	Ethnic minority	breslau	1998		OR	1.44			128	1234	420	942	59	69	361	873					5
+visser 2017	Ethnic minority	bryant	2013		OR				100	730	112	718	13	87	99	631					5
+brewin 2000	Ethnic minority	buydens	1990		OR	1.08			25	9	22	12	16	9	6	3					5
+lin 2018	Ethnic minority	coffey	2006		OR				99	130	36	193	21	78	15	115					5
+brewin 2000	Ethnic minority	difede	1999		OR	1.2			17	14	13	18	8	9	5	9					5
+xue 2015	Ethnic minority	dohrenwend	2008		OR				38	210	154	94	30	8	124	86					5
+brewin 2000	Ethnic minority	green, grace, lindy, leonard	1990		OR	2.36			60	121	36	145	17	43	19	102					5
+brewin 2000	Ethnic minority	kilpatrick	1989		OR	1			82	212	81	213	22	60	59	153					5
+xue 2015	Ethnic minority	koenen	2002		OR	0.87	0.57	1.34	568	2140											5
+xue 2015	Ethnic minority	mayo	2013	groups	OR				835	31361	4966	27230	73	762	4893	26468					5
+xue 2015	Ethnic minority	mayo	2013	groups	OR				296	8108	2689	5715	102	194	2587	5521					5
+brewin 2000	Ethnic minority	norris	1992		OR	1			62	780	391	451	28	34	363	417					5
+brewin 2000	Ethnic minority	riggs	1992		OR	1.94			44	42	55	31	30	14	25	17					5
+xue 2015	Ethnic minority	shea	2013		OR	0.33	0.04	2.64	30	208	29	209	2	28	27	181					5
+brewin 2000	Ethnic minority	sutker	1990		OR	1.2			131	62	14	179									5
+tang 2017	Ethnic minority	tian	2014		OR	2.95	0.159	54.829	261	4343	20	4584									5
+brewin 2000	Ethnic minority	ursano	1999		OR	3.85	1.16	12.7780172413793	42	80	29	93	17	25	12	68					5
+brewin 2000	Ethnic minority	vasterling	1997		OR	4.65			18	23	28	13	16	2	12	11					5
+tolin 2006	Female	abram	2004		OR				111	781	361	531	53	58	308	473					4
+tolin 2006	Female	ahmad	1996	outcomes	OR				6	12	12	6	2	4	10	2					4
+tolin 2006	Female	ahmad	1996	outcomes	OR				9	10	8	11	4	5	4	6					4
+tang 2017	Female	altindag	2005		OR				18	60	43	35	8	10	35	25					4
+cnossen 2017	Female	alway	2016		OR	0.92	0.23	3.67	15	70	18	67	3	12	15	55					4
+tolin 2006	Female	armenian	2000		OR	0.9	0.6	1.35	154	583	393	344	87	67	306	277					4
+tolin 2006	Female	basoglu	1994		OR				12	98	50	60	6	6	44	54					4
+lin 2018	Female	beck	2006		OR				130	93	162	61	98	32	64	29					4
+tolin 2006	Female	blanchard	1994		OR				23	27	32	18	17	6	15	12					4
+tolin 2006	Female	blanchard	1995		OR				40	58	63	35	31	9	32	26					4
+brewin 2000	Female	blanchard	1996	groups	OR	2.02			62	51	77	36	49	13	28	23					4
+visser 2017	Female	blanchard	1997		OR				55	47	68	34	43	12	25	22					4
+tolin 2006	Female	blanchard	1996	groups	OR				48	84	88	44	38	10	50	34					4
+brewin 2000	Female	brent	1995		OR	2.36			8	138	67	79	8	0	59	79					4
+brewin 2000	Female	breslau	1991		OR	2.76	1.63	4.65	93	301	228	166	70	23	158	143					4
+brewin 2000	Female	breslau	1998		OR	2.01	1.23	3.29	133	1284	664	753	86	47	578	706					4
+tolin 2006	Female	breslau	1999		OR				185	1771	935	1021	122	63	813	958					4
+tolin 2006	Female	bryant	2000		OR				24	89	46	67	16	8	30	59					4
+tolin 2006	Female	bryant	2003		OR				33	101	55	79	21	12	34	67					4
+visser 2017	Female	bryant	2013		OR				100	730	223	607	31	69	192	538					4
+tolin 2006	Female	carey	2003		OR				40	161	123	78	27	13	96	65					4
+cnossen 2017	Female	caspi	2005		OR	1.26	0.5	3.2	22	98	49	71	10	12	39	59					4
+tang 2017	Female	chen	2012		OR	2.19	1.158	4.187	65	222	184	103	50	15	134	88					4
+tolin 2006	Female	chibnall	1994		OR				13	29	33	9	12	1	21	8					4
+tang 2017	Female	chou	2007		OR	3.63	0.636	20.654	9	207											4
+lin 2018	Female	coffey	2006		OR				99	130	159	70	72	27	87	43					4
+tolin 2006	Female	cohen	2002		OR				44	33	40	37	26	18	14	19					4
+tolin 2006	Female	creamer	2001		OR				139	10502	5936	4705	83	56	5853	4649					4
+tolin 2006	Female	cuffe	1998		OR	14.32	4.21	48.69	17	63	52	28	15	2	37	26					4
+tolin 2006	Female	curran	1990		OR				13	13	13	13	9	4	4	9					4
+tolin 2006	Female	davidson	1991		OR				39	2947	1626	1360	27	12	1599	1348					4
+tolin 2006	Female	daviss	2000		OR				6	42	17	31	4	2	13	29					4
+tolin 2006	Female	de jong	2001	groups	OR				244	409	298	355	130	114	168	241					4
+tolin 2006	Female	de jong	2001	groups	OR				189	1011	749	451	114	75	635	376					4
+tolin 2006	Female	de jong	2001	groups	OR				104	481	311	274	42	62	269	212					4
+tolin 2006	Female	de jong	2001	groups	OR				173	437	347	263	119	54	228	209					4
+davydow 2015	Female	dew	2012		HR	1.53	0.76	3.11	38	201	125	179									4
+brewin 2000	Female	difede	1999		OR	1.16			17	14	9	22	4	13	5	9					4
+brewin 2000	Female	dunmore	1999		OR	1.67			64	28	44	48	34	30	10	18					4
+tang 2017	Female	eksi	2007		OR				96	64	102	58	55	41	47	17					4
+tolin 2006	Female	essau	2000		OR				17	1018	614	421	11	6	603	415					4
+tolin 2006	Female	famularo	1994		OR				41	76	69	48	19	22	50	26					4
+tolin 2006	Female	fauerbach	2000		OR				18	52	15	55	3	15	12	40					4
+visser 2017	Female	freedman	1999		OR				12	37	26	23	4	8	22	15					4
+tolin 2006	Female	freedman	2002		OR				34	163	104	93	15	19	89	74					4
+brewin 2000	Female	frommberger	1998		OR	3.26			28	124	59	93	18	10	41	83					4
+tolin 2006	Female	fullerton	2001		OR	4.39	1.69	11.38	42	80	58	64	30	12	28	52					4
+tolin 2006	Female	garrison	1995		OR	2.5	1.08	5.79	29	371	211	189	21	8	190	181					4
+tolin 2006	Female	giaconia	1995		OR	6.37	2.1	19.6	24	141	82	83	20	4	62	79					4
+visser 2017	Female	gil, caspi et al.	2005		OR				17	103	50	70	6	11	44	59					4
+tolin 2006	Female	gill	2002		OR				69	268	121	216	25	44	96	172					4
+tolin 2006	Female	green	1994		OR				7	92	61	38	7	0	54	38					4
+brewin 2000	Female	green, lindy et al.	1990		OR	1.49			53	67	74	46	38	15	36	31					4
+lin 2018	Female	hamazaki	2014		OR				15	222	51	186	8	7	43	179					4
+tolin 2006	Female	helzer	1997		OR				25	2468	1528	965	20	5	1508	960					4
+tolin 2006	Female	hickling	1998		OR				38	69	74	33	33	5	41	28					4
+tolin 2006	Female	holbrook	2002		OR	2.8	1.9	4.1	153	474	220	407									4
+tolin 2006	Female	holmes	2001		OR				30	53	58	25	22	8	36	17					4
+tolin 2006	Female	hondius	2000		OR	0.43	0.164	1.111	30	450	147	333	5	25	142	308					4
+tolin 2006	Female	hondiusi	2000		OR	0.71	0.244	2	18	138	53	103	5	13	48	90					4
+tolin 2006	Female	hoven	2005		OR	1.91	1.55	2.36	864	7372	4316	3920	574	290	3742	3630					4
+lin 2018	Female	hruska	2014		OR				25	224	111	138	20	5	91	133					4
+tolin 2006	Female	hsu	2002		OR				70	253	182	141	46	24	136	117					4
+tolin 2006	Female	keppel-benson	2002		OR				7	43	21	29	3	4	18	25					4
+brewin 2000	Female	kessler	1995		OR	1.55			459	5418	3065	2812	320	139	2745	2673					4
+tolin 2006	Female	koren	1999		OR				24	50	25	49	7	17	18	32					4
+tolin 2006	Female	kozaric-kovacic	2000		OR				156	212	211	157	77	79	134	78					4
+tolin 2006	Female	lai	2004		OR				26	226	119	133	16	10	103	123					4
+tang 2017	Female	lee	2009		OR	1.5	0.8	2.8125	76	120	89	107	39	37	50	70					4
+tolin 2006	Female	levin	2001		OR				14	107	35	86	8	6	27	80					4
+giannoni-pastor 2016	Female	lu	2007		OR	3.17	1.01	9.91	22	60	34	48	13	9	21	39					4
+tang 2017	Female	ma	2011		OR	1.83	1.14	2.95	79	3129	1670	1538	51	28	1619	1510					4
+tolin 2006	Female	mcmillen	2000		OR	6.49	1.87	22.5241176470588	16	114	64	66	13	3	51	63					4
+tolin 2006	Female	meeske	2001		OR				11	40	22	29	5	6	17	23					4
+tolin 2006	Female	mellman	2001		OR				12	38	20	30	4	8	16	22					4
+tolin 2006	Female	merry	1994		OR				12	54	55	11	10	2	45	9					4
+brewin 2000	Female	norris	1992		OR	1.2			73	918	517	474	44	29	473	445					4
+tolin 2006	Female	norris	2003		OR				298	2211	1602	907	233	65	1369	842					4
+brewin 2000	Female	north  full	1992		OR	2.1			210	690	300	600	102	108	198	492					4
+brewin 2000	Female	north  full	1994		OR	1.67			36	90	67	59	24	12	43	47					4
+tolin 2006	Female	ohayon	2000		OR	2.8	1.3	6.1	34	1798	1009	823	27	7	982	816					4
+lin 2018	Female	ongecha	2004		OR				35	229	67	197	12	23	55	174					4
+tolin 2006	Female	ouimette	2004		OR				33	101	82	52	18	15	64	37					4
+dai 2016	Female	parvaresh	2009		OR	0.97	0.458	2.061	58	102	103	57									4
+tolin 2006	Female	riggs	1995		OR				8	52	38	22	8	0	30	22					4
+tolin 2006	Female	robin	1997		OR				14	233	130	117	8	6	122	111					4
+tolin 2006	Female	rothenhausler	2002		OR				4	71	32	43	0	4	32	39					4
+tolin 2006	Female	sack	1999		OR				9	22	14	17	4	5	10	12					4
+tolin 2006	Female	servan-schreiber	1998		OR				7	54	31	30	2	5	29	25					4
+brewin 2000	Female	shalev	1996		OR	0.86			13	38	20	31	4	9	16	22					4
+brewin 2000	Female	shalev	1997		OR	1.44			35	172	109	98	21	14	88	84					4
+tolin 2006	Female	shalev	2005	groups	OR				65	289	175	179	32	33	143	146					4
+tolin 2006	Female	shalev	2005	groups	OR				14	25	20	19	7	7	13	12					4
+xue 2015	Female	shea	2013		OR	1.03	0.12	8.89	30	208	18	220	2	28	16	192					4
+tolin 2006	Female	shore	1989		OR				39	509	274	274	23	16	251	258					4
+tolin 2006	Female	silove	1997		OR				14	21	18	17	8	6	10	11					4
+tolin 2006	Female	silverman	1996		OR				6	16	12	10	5	1	7	9					4
+tolin 2006	Female	somasundaram	1996		OR				7	16	16	7	6	1	10	6					4
+tolin 2006	Female	stallard	1998		OR				41	78	51	68	28	13	23	55					4
+trickey 2012	Female	stallard	2004		OR				46	112	83	75	35	11	48	64					4
+brewin 2000	Female	steinglass	1990	groups	OR	3.26			8	31	20	19	7	1	13	18					4
+brewin 2000	Female	steinglass	1990	groups	OR	1.61			11	65	40	36	8	3	32	33					4
+davydow 2015	Female	stukas	2009		OR	3.36			53	247	152	148	36	17	116	131					4
+dai 2016	Female	tian	2014		OR	1.27	0.971	1.648	261	4343	1987	2617									4
+tolin 2006	Female	udwin	2000		OR				111	106	159	58	90	21	69	37					4
+brewin 2000	Female	ursano	1999		OR	2.02			42	80	58	64	30	12	28	52					4
+tolin 2006	Female	vaiva	2003		OR				57	55	37	75	22	35	15	40					4
+tolin 2006	Female	van zelst	2003		OR				13	409	240	182	7	6	233	176					4
+brewin 2000	Female	vasterling	1997		OR	0.86			18	23	10	31	4	14	6	17					4
+tolin 2006	Female	yule	2000		OR				111	106	159	58	90	21	69	37					4
+tang 2017	Female	zhou	2013		OR				2028	12179	7327	6880	968	1060	6359	5820					4
+tolin 2006	Female	zink	2003		OR				32	111	58	85	17	15	41	70					4
+brewin 2000	Low education	acierno	1999	groups	OR	1.49			94	370	85	379	23	71	62	308					5
+brewin 2000	Low education	acierno	1999	groups	OR	1.29			89	520	93	516	20	69	73	447					5
+tang 2017	Low education	altindag	2005		OR				18	60	9	69	3	15	6	54					5
+cnossen 2017	Low education	alway	2016		SMD				15	70							13.07	2.75	11.93	2.27	5
+tang 2017	Low education	armenian	2000		OR	0.6	0.4	0.9	154	583	494	243	90	64	404	179					5
+brewin 2000	Low education	blanchard	1996		OR	1.34			62	51	28	85	14	48	14	37					5
+visser 2017	Low education	blanchard	1997		OR				55	47	26	76	13	42	13	34					5
+brewin 2000	Low education	bremner	1993		OR	2.5			38	28	27	39	19	19	8	20					5
+brewin 2000	Low education	breslau	1991		OR	1.47	1.11	1.96	93	301											5
+brewin 2000	Low education	bromet	1998	outcomes	OR	1.04	0.98	1.10367346938776	301	2463											5
+brewin 2000	Low education	bromet	1998	outcomes	OR	1.11	1.01	1.22	209	2541											5
+visser 2017	Low education	bryant	2013		OR				100	730	319	511	38	62	281	449					5
+cnossen 2017	Low education	bryant, marosszeky	2000		SMD				26	70							10.85	2.27	10.98	2.65	5
+tang 2017	Low education	chen	2012		OR	2.97	1.124	7.826	65	222	238	49	60	5	178	44					5
+tang 2017	Low education	chou	2007		OR	1.09	0.845	1.40603550295858	9	207											5
+lin 2018	Low education	coffey	2006		OR				99	130	38	191	24	75	14	116					5
+xue 2015	Low education	dohrenwend	2008		OR				29	219	65	183	10	19	55	164					5
+brewin 2000	Low education	dunmore	1999		OR	1.29			64	28	19	73	15	49	4	24					5
+visser 2017	Low education	gil, caspi et al.	2005		SMD				17	103							12.3	2.4	12.5	2.7	5
+lin 2018	Low education	hamazaki	2014		OR				15	222	137	100	8	7	129	93					5
+visser 2017	Low education	holbrook	2001		OR				261	563	119	705	35	226	84	479					5
+brewin 2000	Low education	kilpatrick	1989		OR	1.34			82	212	42	252	14	68	28	184					5
+xue 2015	Low education	koenen	2002		OR	1.97	1.55	2.53	568	2140											5
+tang 2017	Low education	lee	2009		OR	2.3	1.2	4.40833333333333	76	120	108	88	51	25	57	63					5
+brewin 2000	Low education	macklin	1998		SMD				59	31							13.7	3.1	15.2	2.5	5
+xue 2015	Low education	mayo	2013	groups	OR	0.62	0.37	1.06	823	31373	31092	1104	808	15	30284	1089					5
+xue 2015	Low education	mayo	2013	groups	OR	0.85	0.52	1.4	470	7934	7791	613	280	190	7511	423					5
+lin 2018	Low education	ongecha	2004		OR				35	229	217	47	25	10	192	37					5
+brewin 2000	Low education	riggs	1992		OR	1.34			44	42	14	72	9	35	5	37					5
+brewin 2000	Low education	shalev	1996		SMD				13	38							11.8	3.3	15.2	3.2	5
+xue 2015	Low education	shea	2013		OR				30	208	197	41	27	3	170	38					5
+brewin 2000	Low education	sutker	1990		SMD				131	62							11.2	3.5	13.1	3.4	5
+brewin 2000	Low education	ursano	1999		OR	1.6	0.7	3.65	18	81											5
+brewin 2000	Low education	vasterling	1997		SMD				18	23							13.8	2	12.6	2.1	5
+tang 2017	Low education	zhou	2013		OR				2028	12179	7795	6412	567	1461	7228	4951					5
+brewin 2000	Low SES	acierno	1999	groups	OR	1.08			92	351	98	345	25	67	73	278					5
+brewin 2000	Low SES	acierno	1999	groups	OR	1.12			86	492	111	467	18	68	93	399					5
+brewin 2000	Low SES	brent	1995		OR	1.04			8	138	8	138	0	8	8	130					5
+brewin 2000	Low SES	breslau	1998		OR	2.45			125	1199	439	885	51	74	388	811					5
+tang 2017	Low SES	chen	2012		OR				65	222	177	110	52	13	125	97					5
+brewin 2000	Low SES	dunmore	1999		OR	1.29			63	28	33	58	25	38	8	20					5
+giannoni-pastor 2016	Low SES	el hamaoui	2002		OR	15.19			14	46											5
+visser 2017	Low SES	holbrook	2001		OR				261	563	466	358	164	97	302	261					5
+brewin 2000	Low SES	kilpatrick	1989		OR	1.29			82	212	79	215	22	60	57	155					5
+digangi 2013	Low SES	koenen	2007		OR	3.4	1.3	8.7	21	124	47	98	12	9	35	89					5
+tang 2017	Low SES	lee	2009		OR	2.1	1.2	3.675	76	120	118	78	54	22	64	56					5
+giannoni-pastor 2016	Low SES	lu	2007		OR	2.66			22	60	57	25	14	8	43	17					5
+brewin 2000	Low SES	mcfarlane	1988		OR	1.16			11	34	6	39	1	10	5	29					5
+giannoni-pastor 2016	Low SES	perry	1992		SMD				18	33							26.7	8	32.4	6.5	5
+brewin 2000	Low SES	reich	1996		SMD				53	29							4.3	0.9	3.7	11	5
+brewin 2000	Low SES	riggs	1992		OR	1.49			44	42	31	55	17	27	14	28					5
+brewin 2000	Low SES	schnurr	1993		OR	1.08			10	56	19	47	3	7	16	40					5
+brewin 2000	Low SES	sutker	1990		OR	2.77			131	62	97	96	75	56	22	40					5
+brewin 2000	Low SES	ursano	1999		OR	1.87			36	71	38	69	16	20	22	49					5
+brewin 2000	Low SES	vasterling	1997		SMD				18	23							45.6	16.2	38.4	14.8	5
+cnossen 2017	Psychotic disorder	alway	2016		OR	0.78	0.26	2.39	15	70	44	41	7	8	37	33					4
+brewin 2000	Psychotic disorder	bremner	1993		OR	1.04			38	28	12	54	7	31	5	23					4
+brewin 2000	Psychotic disorder	brent	1995		OR	2.66			8	138	44	102	5	3	39	99					4
+brewin 2000	Psychotic disorder	breslau	1991		OR	10	1.03	97.32	93	301											4
+brewin 2000	Psychotic disorder	bromet	1998	outcomes	OR	3.03	2.17	4.23	301	2463											4
+brewin 2000	Psychotic disorder	bromet	1998	outcomes	OR	4.54	2.13	9.68	209	2541											4
+visser 2017	Psychotic disorder	bryant	2013		OR				100	730	425	405	31	69	394	336					4
+cnossen 2017	Psychotic disorder	caspi	2005		OR	1.18	0.47	2.97	22	98	56	64	11	11	45	53					4
+brewin 2000	Psychotic disorder	dunmore	1999		OR	2.1			63	28	45	46	36	27	9	19					4
+giannoni-pastor 2016	Psychotic disorder	dyster-aas	2008		OR	3.26			6	58											4
+brewin 2000	Psychotic disorder	fauerbach	1997		RR	2.54			19	44	29	34	13	6	16	28					4
+visser 2017	Psychotic disorder	gil, caspi et al.	2005		OR	3.7	1.1	12.4454545454546	17	103	49	71	12	5	37	66					4
+cnossen 2017	Psychotic disorder	hibbard	1998		OR	0.83	0.29	2.35	17	83	51	49	8	9	43	40					4
+brewin 2000	Psychotic disorder	kelly	1998		OR	3			19	42	27	34	14	5	13	29					4
+xue 2015	Psychotic disorder	koenen	2002		OR	4.64	2.26	9.19	568	2140											4
+digangi 2013	Psychotic disorder	koenen	2008		OR	4.55	1.04	19.87	27	211	177	61	25	2	152	59					4
+brewin 2000	Psychotic disorder	mcfarlane	1988		OR	2.45			11	34	21	24	8	3	13	21					4
+davydow 2008b	Psychotic disorder	nickel	2004		OR				4	37	17	24	4	0	13	24					4
+brewin 2000	Psychotic disorder	north	1994	outcomes	OR	2.45			19	54	17	56									4
+brewin 2000	Psychotic disorder	north	1994	outcomes	OR	1			12	51	18	45									4
+visser 2017	Psychotic disorder	o'donnell	2004		OR	4.72	1.84	12.1078260869565	13	244											4
+brewin 2000	Psychotic disorder	pitman	1991		OR	1.39			40	61	15	86	8	32	7	54					4
+grekin 2014	Psychotic disorder	seng	2013		OR				9	557	18	548	0	9	18	539					4
+brewin 2000	Psychotic disorder	speed	1989		OR	1.49			31	31	6	56	2	29	4	27					4
+davydow 2015	Psychotic disorder	stukas	2009		OR	3.04			53	247	95	205	30	23	65	182					4
+brewin 2000	Psychotic disorder	ursano	1999		OR	6.4	2.01	20.41	18	81	17	82	8	10	9	72					4
+grekin 2014	Psychotic disorder	zambaldi	2011		OR	4.47	1.62	12.33	21	377	37	361	6	15	31	346					4
