@@ -6,10 +6,14 @@ compilerMode: tame
 children:
   - type: VariableSupplier
     persistentItems: false
+    permitted:
+      - numeric
+      - factor
+      - id
     stretchFactor: 1
     children:
       - type: TargetLayoutBox
-        label: List of variables
+        label: List of variables A
         children:
           - type: VariablesListBox
             name: vars
@@ -212,7 +216,7 @@ children:
                     format: string
           - type: CollapseBox
             collapsed: true
-            label: 9. Publication bias
+            label: 9. Small-study effects
             children:
               - type: LayoutBox
                 children:

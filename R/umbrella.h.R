@@ -9,7 +9,7 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             vars = NULL,
             criteria = "Ioannidis",
             method.var = "REML",
-            pre_post_cor = 0.8,
+            pre_post_cor = 0.5,
             true_effect = "largest",
             method.esb = "TESSPSST",
             mult.level = FALSE,
@@ -85,7 +85,12 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 
             private$..vars <- jmvcore::OptionVariables$new(
                 "vars",
-                vars)
+                vars,
+                takeFromDataIfMissing=TRUE,
+                permitted=list(
+                    "numeric",
+                    "factor",
+                    "id"))
             private$..criteria <- jmvcore::OptionList$new(
                 "criteria",
                 criteria,
@@ -111,7 +116,7 @@ umbrellaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 pre_post_cor,
                 min=0,
                 max=1,
-                default=0.8)
+                default=0.5)
             private$..true_effect <- jmvcore::OptionList$new(
                 "true_effect",
                 true_effect,
@@ -589,7 +594,7 @@ umbrellaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 name="",
                 title="Results of the umbrella review")
-            self$add(jmvcore::Preformatted$new(
+            self$add(jmvcore::Html$new(
                 options=options,
                 name="text"))
             self$add(jmvcore::Table$new(

@@ -11,8 +11,13 @@ options:
       type: Data
       
     - name: vars
-      title: List of variables
+      title: List of variables B
       type: Variables
+      takeFromDataIfMissing: true
+      permitted:
+        - numeric
+        - factor
+        - id
 
     - name: criteria
       title: Criteria used for the stratification of evidence

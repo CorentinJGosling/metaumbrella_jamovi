@@ -15,7 +15,27 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             status <- attr(check, "status")
             message <- attr(check, "message")
             
-            self$results$text$setContent(paste("Your dataset contains", status, "\n=>", message))
+            text <- paste("Your dataset contains", status, "\n=>", message)
+            
+            lines <- strsplit(text, '\n')[[1]]
+            
+            if (status == "ERRORS") {
+              style = "style = 'color: #FE191B;' "
+              color = "#FE191B"
+              background = "#FFC0CB"
+            } else if (status == "WARNINGS") {
+              style = "style = 'color: #CA8A00;' "
+              color = "#CA8A00"
+              background = "#FFE4A8"
+            } else {
+              style = "style = 'color: #068F07;' "
+              color = "#068F07"#; display: flex; align-items: center; flex-direction: column; "
+              background = "#DAFAD0"
+            }
+            html <- paste0(paste0("<div style = 'border: 1px solid ", color, "; background-color: ", background, "; padding: 1rem; margin-top: 1rem; color: ",  color, ";'><p "), 
+                           style, '>', paste0(lines, collapse=paste0('</p><p ', style, '>')), '</p></div>')
+            
+            self$results$text$setContent(html)
             
             tableC <- self$results$checktable
             
