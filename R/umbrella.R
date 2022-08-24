@@ -130,7 +130,7 @@ umbrella = function (x, method.var = "REML", mult.level = FALSE, r = 0.5, method
   # }
   #### JAMOVI
   if (attr(checkings, "status") == "ERRORS") {
-    stop("Data did not pass the checkings. You can find the list of error messages and problematic rows in the table below.")
+    stop("Your dataset did not pass the checks. You can find the list of error messages and problematic rows in the table below.")
   }
 
 
