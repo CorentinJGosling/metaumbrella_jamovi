@@ -659,25 +659,32 @@ umbrellaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                         `type`="text"),
                     list(
                         `name`="value", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="value_CI", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="eG", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="eG_CI", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="eOR", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="eOR_CI", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="p_value", 
-                        `type`="text"))))
+                        `type`="text", 
+                        `format`="zto"))))
             self$add(jmvcore::Table$new(
                 options=options,
                 name="addtable",
@@ -689,37 +696,48 @@ umbrellaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                         `type`="text"),
                     list(
                         `name`="I2", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="PI_eG", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="PI_eOR", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="egger_p", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="ESB_p", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="power_med", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="JK_p", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="largest_CI_eG", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="largest_CI_eOR", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="rob", 
-                        `type`="text"),
+                        `type`="text", 
+                        `format`="zto"),
                     list(
                         `name`="amstar", 
-                        `type`="text"))))
+                        `type`="text", 
+                        `format`="zto"))))
             self$add(jmvcore::Image$new(
                 options=options,
                 name="plot",

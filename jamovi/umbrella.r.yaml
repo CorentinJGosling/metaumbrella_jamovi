@@ -55,18 +55,25 @@ items:
           type: text
         - name: value
           type: text
+          format: zto
         - name: value_CI
           type: text
+          format: zto
         - name: eG
           type: text
+          format: zto
         - name: eG_CI
           type: text
+          format: zto
         - name: eOR
           type: text
+          format: zto
         - name: eOR_CI
           type: text
+          format: zto
         - name: p_value
           type: text
+          format: zto
           
     - name:  addtable
       title:  Additional results
@@ -77,26 +84,37 @@ items:
           type: text
         - name: I2
           type: text
+          format: zto
         - name: PI_eG
           type: text
+          format: zto
         - name: PI_eOR
           type: text
+          format: zto
         - name: egger_p
           type: text
+          format: zto
         - name: ESB_p
           type: text
+          format: zto
         - name: power_med
           type: text
+          format: zto
         - name: JK_p
           type: text
+          format: zto
         - name: largest_CI_eG
           type: text
+          format: zto
         - name: largest_CI_eOR
           type: text
+          format: zto
         - name: rob
           type: text
+          format: zto
         - name: amstar
           type: text
+          format: zto
           
     - name: plot
       title: Forest Plot
