@@ -754,7 +754,7 @@ umbrellaBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             super$initialize(
                 package = "metaumbrella",
                 name = "umbrella",
-                version = c(1,0,5),
+                version = c(1,1,0),
                 options = options,
                 results = umbrellaResults$new(options=options),
                 data = data,

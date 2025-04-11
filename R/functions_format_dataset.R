@@ -1,7 +1,7 @@
 #' Hidden function formatting dataset as the umbrella function
 #'
 #' @noRd
-.format_dataset = function (x_i, method.var = "REML", mult.level = FALSE, r = 0.5, verbose = TRUE, pre_post_cor) {
+.format_dataset = function (x_i, method.var = "REML", mult.level = FALSE, r = 0.5, verbose = TRUE, pre_post_cor, JAMOVI = FALSE) {
 
   #### Effect size conversions ------
 
@@ -10,7 +10,8 @@
 
     if (is.na(x_i[i, "se"])) {
       tmp = .improve_ci(x_i[i, "value"], x_i[i, "ci_lo"], x_i[i, "ci_up"], FALSE)
-      tmp = .estimate_d_from_md(tmp$value, tmp$ci_lo, tmp$ci_up, x_i[i, "n_cases"], x_i[i, "n_controls"])
+      tmp = .estimate_d_from_md(tmp$value, tmp$ci_lo, tmp$ci_up,
+                                x_i[i, "n_cases"], x_i[i, "n_controls"])
       x_i[i, "value"] = tmp$value
       x_i[i, "situation"] = gsub("_CI", "", as.character(x_i[i, "situation"]))
     } else {
@@ -52,8 +53,8 @@
   for (i in which(x_i[, "measure"] == "R")) {
     # r + se
     if (!is.na(x_i[i, "se"])) {
-      x_i[i, "ci_lo"] = (x_i[i, "value"] - qnorm(0.975) * x_i[i, "se"])
-      x_i[i, "ci_up"] = (x_i[i, "value"] + qnorm(0.975) * x_i[i, "se"])
+      x_i[i, "ci_lo"] = x_i[i, "value"] - qnorm(0.975) * x_i[i, "se"]
+      x_i[i, "ci_up"] = x_i[i, "value"] + qnorm(0.975) * x_i[i, "se"]
       x_i[i, "ci_lo"] = .estimate_z_from_r(n_sample = x_i[i, "n_sample"], r = x_i[i, "ci_lo"])$value
       x_i[i, "ci_up"] = .estimate_z_from_r(n_sample = x_i[i, "n_sample"], r = x_i[i, "ci_up"])$value
       x_i[i, "se"] = (x_i[i, "ci_up"] - x_i[i, "ci_lo"]) / (2 * qnorm(0.975))
@@ -113,7 +114,7 @@
   if (length(measure) > 1) {
 
     # Users report no SMD/SMC => OR is the target measure
-    if (all(!measure  %in% c("SMD", "SMC")) & all(measure != "IRR")) {
+    if (all(!measure %in% c("SMD", "SMC")) & all(!measure %in% c("Z", "IRR"))) {
 
       # we convert all HR to OR
       if (any(measure == "HR")) {
@@ -126,17 +127,10 @@
         if (verbose) message(paste0("I converted Risk Ratio to Odds Ratio for factor: ", unique(x_i$factor)))
       }
 
-      # we convert all Z to SMD and then to OR
-      if (any(measure == "Z")) {
-        x_i = .convert_Z_to_SMD(x_i)
-        x_i = .convert_SMD_to_OR(x_i)
-        if (verbose) message(paste0("I converted Z to Odds Ratio for factor: ", unique(x_i$factor)))
-      }
-
       measure = "OR"
 
     # Users report SMD, which is used as the target measure
-    } else if (any(measure %in% c("SMD", "SMC")) & all(measure != "IRR")) {
+    } else if (any(measure %in% c("SMD", "SMC")) & !any(measure %in% c("IRR", "Z"))) {
 
       # we convert all HR to OR
       if (any(measure == "HR")) {
@@ -153,11 +147,6 @@
         x_i = .convert_OR_to_SMD(x_i)
         if (verbose) message(paste("I converted Odds Ratio to a SMD for factor: ", unique(x_i$factor)))
       }
-      # we convert all Z to SMD
-      if (any(measure == "Z")) {
-        x_i = .convert_Z_to_SMD(x_i)
-        if (verbose) message(paste("I converted Fisher's Z to a SMD for factor: ", unique(x_i$factor)))
-      }
       # we convert all SMC to SMD
       if (any(measure == "SMC")) {
         x_i = .convert_SMC_to_SMD(x_i, pre_post_cor)
@@ -167,8 +156,9 @@
       measure = "SMD"
 
     } else {
-      stop(paste("Different measures (", paste(unique(x_i$measure), collapse = ", ") , ") for the same factor:", unique(x_i$factor),
-                 ". Please, provide an unique effect size for this factor (or a combination of effect size measures accepted for a same factor: see the manual for the list of possible combination)."))
+      stop(paste0("Different measures (", paste(unique(x_i$measure), collapse = ", ") ,
+                  ") for the same factor: '", unique(x_i$factor),
+                 "'. Please, provide an unique effect size for this factor (or a combination of effect size measures accepted for a same factor: see the manual for the list of possible combination)."))
     }
   }
   # ------------------------------------------
@@ -179,20 +169,18 @@
     measure = unique(x_i[, "measure"])
   }
 
-  if (!method.var %in% c("DL", "hksj", "REML", "PM", "ML", "FE")) {
-    stop("The between-study variance estimator (argument method.var of the umbrella function) should be either 'PM', 'ML', 'DL', 'hksj', 'REML' or 'FE'.")
-  }
 
   #### Multivariate situations ------
   if (any(x_i$duplicate == TRUE)) {
 
-    x_i$all_vals_study = paste0("We have detected an ERROR in the selection of the options. Study: '", x_i$author, " (", x_i$year, ")' contains multiple ", x_i$multiple_es)
+    x_i$all_vals_study = paste0("study: '", x_i$author, " (", x_i$year, ")' contains multiple ", x_i$multiple_es)
 
     if (mult.level == FALSE) {
-      stop(paste(paste(unique(x_i$all_vals_study[x_i$duplicate == TRUE]), collapse = " / "), " and is repeated several times in your dataset. \nPlease, check that it is not a repeated entry. If not, indicate that you have multivariate data by checking the appropriate box in the 'Multivariate datasets' section."))
-    }
-    if (r > 1 | r < -1) {
-      stop("The r argument of the umbrella function (the r value that will be applied to aggregate studies with multiple outcomes) must be within the range of [-1; 1].")
+      if (JAMOVI) {
+        stop(paste(paste(unique(x_i$all_vals_study[x_i$duplicate == TRUE]), collapse = " / "), " and is repeated several times in your dataset. \nPlease, check that it is not a repeated entry. If not, indicate that you have multivariate data by checking the appropriate box in the 'Multivariate datasets' section."))
+      } else {
+        stop(paste(paste(unique(x_i$all_vals_study[x_i$duplicate == TRUE]), collapse = " / "), " and is repeated several times in your dataset. \nPlease, check that it is not a repeated entry. If not, indicate that you have multivariate data by specfying 'mult.level = TRUE' as an argument of the 'umbrella' function."))
+      }
     }
 
     ## if the input dataset has a multivariate structure, we create a message to indicate whether each study with multiple outcomes has been handled as having multiple groups or outcomes
@@ -391,6 +379,11 @@
           ###########################################
         } else if (grepl("ES_SE", x_raw_i$situation, fixed = TRUE)) {
 
+          # value_i = .estimate_g_from_d(d = x_raw_i$value, n_cases = n_cases_i, n_controls = n_controls_i, se = x_raw_i$se)$value
+          # se_i = .estimate_g_from_d(d = x_raw_i$value, n_cases = n_cases_i, n_controls = n_controls_i, se = x_raw_i$se)$se
+          # ci_lo_i = value_i - se_i * qt(0.975, n_cases_i + n_controls_i - 2)
+          # ci_up_i = value_i + se_i * qt(0.975, n_cases_i + n_controls_i - 2)
+
           value_i = x_raw_i$value
           se_i = x_raw_i$se
           ci_lo_i = value_i - se_i * qt(0.975, n_cases_i + n_controls_i - 2)
@@ -408,6 +401,11 @@
         } else if (grepl("ES_CI", x_raw_i$situation, fixed = TRUE)) {
 
           tmp = .improve_ci(x_raw_i$value, x_raw_i$ci_lo, x_raw_i$ci_up, FALSE)
+          # value_i = tmp$value * .d_j(n_cases_i + n_controls_i - 2)
+          # ci_lo_i = tmp$ci_lo * .d_j(n_cases_i + n_controls_i - 2)
+          # ci_up_i = tmp$ci_up * .d_j(n_cases_i + n_controls_i - 2)
+          # se_i = (ci_up_i - ci_lo_i) / (2 * qt(0.975, n_cases_i + n_controls_i - 2))
+
           value_i = tmp$value
           ci_lo_i = tmp$ci_lo
           ci_up_i = tmp$ci_up
@@ -787,6 +785,7 @@
                                           ifelse(is.na(x_raw_i$rob) & all(is.na(x_i$rob)), NA_real_, NA_real_))))
     x_i_ok = rbind(x_i_ok,
                    data.frame(row_index = x_raw_i$row_index,
+                              meta_review = x_raw_i$meta_review,
                               author = x_raw_i$author,
                               year = x_raw_i$year,
                               multiple_es = x_raw_i$multiple_es,
@@ -844,10 +843,11 @@
       mean_controls_inv_i = x_i_ok$mean_cases[i]
       sd_cases_inv_i = x_i_ok$sd_controls[i]
       sd_controls_inv_i = x_i_ok$sd_cases[i]
-      n_cases_inv_i = x_i_ok$n_controls[i]
-      n_controls_inv_i = x_i_ok$n_cases[i]
+      n_cases_inv_i = x_i_ok$n_cases[i]
+      n_controls_inv_i = x_i_ok$n_controls[i]
 
-      x_i_ok$reverse_es[i] <- paste0("The effect size has been reversed. Initial value = ", x_i_ok$value[i], " [", x_i_ok$ci_lo[i], ", ", x_i_ok$ci_up[i], "]")
+      x_i_ok$reverse_es[i] <- paste0("The effect size has been reversed. Initial value = ",
+                                     x_i_ok$value[i], " [", x_i_ok$ci_lo[i], ", ", x_i_ok$ci_up[i], "]")
 
       x_i_ok$value[i] <- value_inv_i
       x_i_ok$ci_lo[i] <- cilo_inv_i
@@ -870,8 +870,8 @@
       n_cases_nexp_inv_i = x_i_ok$n_cases_exp[i]
       n_controls_exp_inv_i = x_i_ok$n_controls_nexp[i]
       n_controls_nexp_inv_i = x_i_ok$n_controls_exp[i]
-      time_exp_inv_i = x_i_ok$time_nexp[i]
-      time_nexp_inv_i = x_i_ok$time_exp[i]
+      time_exp_inv_i = x_i_ok$time_exp[i]
+      time_nexp_inv_i = x_i_ok$time_nexp[i]
 
       x_i_ok$reverse_es[i] = paste0("The effect size has been reversed. Initial value = ", x_i_ok$value[i], " [", x_i_ok$ci_lo[i], ", ", x_i_ok$ci_up[i], "]")
 
@@ -912,21 +912,22 @@
     time_nexp_adj = x_i_ok$time_nexp, time_nexp_raw = x_i$time_nexp)
 
   # aggregate data and save original dataset if multilevel data are present
-  if (REPEATED_STUDIES) {
-    x_i_ok_full = x_i_ok
-    x_i_ok = .agg_data(x_i_ok, r = r, measure = measure)
-    rownames(x_i_ok) = make.names(paste(x_i_ok$author, x_i_ok$year, x_i_ok$factor), unique = TRUE)
-  } else {
-    x_i_ok_full = paste0("The dataset does not have a multivariate structure.")
-    rownames(x_i_ok) = make.names(paste(x_i_ok$author, x_i_ok$year, x_i_ok$factor), unique = TRUE)
-  }
-
+  # if (REPEATED_STUDIES) {
+  #   # x_i_ok = x_i_ok_full
+  #   # x_i_ok_save=x_i_ok
+  #   x_i_ok_full = x_i_ok
+  #   x_i_ok = .agg_data(x_i_ok, r = r, measure = measure)
+  #   rownames(x_i_ok) = make.names(paste(x_i_ok$author, x_i_ok$year, x_i_ok$factor), unique = TRUE)
+  # } else {
+  #   x_i_ok_full = paste0("The dataset does not have a multivariate structure.")
+  #   rownames(x_i_ok) = make.names(paste(x_i_ok$author, x_i_ok$year, x_i_ok$factor), unique = TRUE)
+  # }
+  #
   attr(x_i_ok, "amstar") <- unique(x_i$amstar)
   attr(x_i_ok, "measure") <- measure
   attr(x_i_ok, "REPEATED_STUDIES") <- REPEATED_STUDIES
   attr(x_i_ok, "n_studies") <- n_studies
-  attr(x_i_ok, "data_mult") <- x_i_ok_full
+  # attr(x_i_ok, "data_mult") <- x_i_ok_full
   attr(x_i_ok, "comparison_adjustment") <- comparison_adjustment
-  # attr(x_i_ok, "meta") <- path_meta
   x_i_ok
 }

@@ -9,7 +9,7 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
                 df[[fac]] <- df[[fac]]
             df[df == "NA"] <- NA
             
-            check <- .check_data(df)
+            check <- .check_data(df, JAMOVI=TRUE)
             dat <-  attr(check, "data")
             rows <- dat[which(!dat$column_errors %in% c(NA, "") | !dat$column_type_errors %in% c(NA, "")), ]     
             status <- attr(check, "status")
@@ -62,6 +62,8 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             }
             if (status != "ERROR") {
                 res <- umbrella(df, 
+                                JAMOVI = TRUE,
+                                max_asymmetry = 100,
                                 method.var = self$options$method.var,
                                 true_effect = self$options$true_effect,
                                 mult.level = self$options$mult.level,

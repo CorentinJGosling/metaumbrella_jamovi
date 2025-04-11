@@ -1,14 +1,14 @@
 ---
 title: Umbrella Review
 name: metaumbrella
-version: 1.0.5
+version: 1.1.0
 jms: '1.0'
 authors:
   - >-
     Corentin J Gosling [aut, cre], Aleix Solanes [aut], Paolo Fusar-Poli [aut],
     Joaquim Radua [aut]
 maintainer: Corentin J Gosling <cgosling@parisnanterre.fr>
-date: '2022-06-13'
+date: '2025-03-14'
 type: R
 description: >-
   A comprehensive range of facilities to perform umbrella reviews with
