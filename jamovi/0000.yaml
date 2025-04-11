@@ -28,7 +28,7 @@ datasets:
     path: df.radua2019.txt
     description: Datasets inspired from a real umbrella review
     tags:
-      - 'OR, SMD, RR, HR'
+      - OR, SMD, RR, HR
       - Multivariate situations
   - name: df.HR
     path: df.HR.txt

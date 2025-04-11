@@ -63,7 +63,6 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             if (status != "ERROR") {
                 res <- umbrella(df, 
                                 JAMOVI = TRUE,
-                                max_asymmetry = 100,
                                 method.var = self$options$method.var,
                                 true_effect = self$options$true_effect,
                                 mult.level = self$options$mult.level,

@@ -127,7 +127,7 @@
 #' ### obtain a stratification of the evidence according to the Ioannidis classification
 #' add.evidence(umb.multi, criteria = "Ioannidis")
 #' }
-umbrella = function (x, method.var = "REML", mult.level = FALSE, r = 0.5, pre_post_cor = 0.8, method.esb = "TESSPSST", true_effect = "UWLS", tau2 = NULL, max_asymmetry = 10, seed = NA, verbose = TRUE, JAMOVI = FALSE) {
+umbrella = function (x, method.var = "REML", mult.level = FALSE, r = 0.5, pre_post_cor = 0.8, method.esb = "TESSPSST", true_effect = "UWLS", tau2 = NULL, max_asymmetry = 100, seed = NA, verbose = TRUE, JAMOVI = FALSE) {
 
   y = list()
 

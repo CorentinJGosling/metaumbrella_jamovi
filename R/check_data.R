@@ -3,7 +3,7 @@
 #' @param x
 #'
 #' @noRd
-.check_data = function (x, JAMOVI) {
+.check_data = function (x, JAMOVI=FALSE) {
 
   #### Check input type ----------------
 
