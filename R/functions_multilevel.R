@@ -4,7 +4,7 @@
 #' @param measure a measure
 #' @param r a correlation
 #'
-#' @importFrom metaConvert aggregate_df
+#' @importFrom metaConvert metaConvert::aggregate_df
 #'
 #' @noRd
 .agg_mcv = function(x, measure, r) {
@@ -33,7 +33,7 @@
   x_mult_outcome$ID = paste(x_mult_outcome$author, x_mult_outcome$year)
 
   if (nrow(x_mult_outcome) > 0) {
-    df_outcome = suppressWarnings(aggregate_df(x = x_mult_outcome, agg_fact = "ID",
+    df_outcome = suppressWarnings(metaConvert::aggregate_df(x = x_mult_outcome, agg_fact = "ID",
                               es = "value", se = "se",
                               dependence = "outcomes",
                               cor_unit = unique(x_mult_outcome$r)[1],
@@ -84,7 +84,7 @@
 
   if (nrow(x_mult_group) > 0) {
 
-    df_groups = suppressWarnings(aggregate_df(x = x_mult_group, agg_fact = "ID",
+    df_groups = suppressWarnings(metaConvert::aggregate_df(x = x_mult_group, agg_fact = "ID",
                              es = "value", se = "se",
                              dependence = "subgroups",
                              col_fact = c("author", "year", "factor", "indirectness"),

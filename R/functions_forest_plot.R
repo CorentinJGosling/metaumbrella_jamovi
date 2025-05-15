@@ -26,7 +26,7 @@
 #' \code{\link{forest.umbrella}()}
 #'
 #' @examples
-#' forest(umbrella(df.SMD))
+#' meta::forest(umbrella(df.SMD))
 
 NULL
 
@@ -140,7 +140,7 @@ forest.data.frame <- function (x,
   }
 
   if (!is.null(subgroup))
-    res = metagen(TE = es,
+    res = meta::metagen(TE = es,
                   lower = ci_lo, upper = ci_up,
                   digits = digits,
                   sm = ifelse(measure == "eOR", "OR", "SMD"),
@@ -148,7 +148,7 @@ forest.data.frame <- function (x,
                   # split
                   subgroup = dat[, subgroup])
   else
-    res = metagen(TE = es,
+    res = meta::metagen(TE = es,
                   lower = ci_lo, upper = ci_up,
                   # digits = digits,
                   sm = ifelse(measure == "eOR", "OR", "SMD"),
@@ -191,7 +191,7 @@ forest.data.frame <- function (x,
                               "Equivalent\n Standardized Mean Difference (eG)",
                               "Effect size value")), xlab)
 
-  suppressWarnings(forest(
+  suppressWarnings(meta::forest(
     res,
     digits = digits,
     layout = layout,
@@ -269,10 +269,10 @@ forest.data.frame <- function (x,
 #' umb <- umbrella(df.SMD)
 #'
 #' ### generate a forest plot of each factor included in the umbrella review
-#' forest(umb)
+#' meta::forest(umb)
 #'
 #' \dontrun{
-#' forest(umbrella(df.SMD))
+#' meta::forest(umbrella(df.SMD))
 #' }
 
 forest.umbrella <- function (x,
@@ -343,7 +343,7 @@ forest.umbrella <- function (x,
   }
 
   if (!is.null(subgroup))
-    res = metagen(TE = es,
+    res = meta::metagen(TE = es,
                   lower = ci_lo, upper = ci_up,
                   digits = digits,
                   sm = ifelse(measure == "eOR", "OR", "SMD"),
@@ -351,7 +351,7 @@ forest.umbrella <- function (x,
                   # split
                   subgroup = dat[, subgroup])
   else
-    res = metagen(TE = es,
+    res = meta::metagen(TE = es,
                   lower = ci_lo, upper = ci_up,
                   # digits = digits,
                   sm = ifelse(measure == "eOR", "OR", "SMD"),
@@ -394,7 +394,7 @@ forest.umbrella <- function (x,
                          "Equivalent\n Standardized Mean Difference (eG)",
                          "Effect size value")), xlab)
 
-  suppressWarnings(forest(
+  suppressWarnings(meta::forest(
     res,
     digits = digits,
     layout = layout,

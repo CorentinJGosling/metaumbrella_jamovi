@@ -9,7 +9,7 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
                 df[[fac]] <- df[[fac]]
             df[df == "NA"] <- NA
             
-            check <- .check_data(df, JAMOVI=TRUE)
+            check <- .check_data(df)
             dat <-  attr(check, "data")
             rows <- dat[which(!dat$column_errors %in% c(NA, "") | !dat$column_type_errors %in% c(NA, "")), ]     
             status <- attr(check, "status")
@@ -277,7 +277,7 @@ umbrellaClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
                   } else if (self$options$class_forest == "Weak") {
                       class_restrict <- c("High", "Moderate", "Weak")
                   }
-                  forest.umbrella(x = plotData,
+                  forest.data.frame(x = plotData,
                                   measure = self$options$measure_forest,
                                   max.value = self$options$max_x,
                                   main_title = title,

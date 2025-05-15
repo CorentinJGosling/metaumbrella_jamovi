@@ -9,14 +9,14 @@
 .meta_gen = function (x, method.var) {
 
   if (method.var == "hksj") {
-    m = metagen(x$value, x$se, rownames(x),
+    m = meta::metagen(x$value, x$se, rownames(x),
                 prediction = TRUE, method.tau = "DL")
     m = .hksj_meta(m)
   } else if (method.var == "FE") {
-    m = metagen(x$value, x$se, rownames(x),
+    m = meta::metagen(x$value, x$se, rownames(x),
                 prediction = TRUE, method.tau = "DL")
   } else {
-    m = metagen(x$value, x$se, rownames(x),
+    m = meta::metagen(x$value, x$se, rownames(x),
                 prediction = TRUE, method.tau = method.var)
   }
   return(m)
@@ -33,11 +33,11 @@
   x$value = log(x$value)
 
   if (method.var == "hksj") {
-    m = .hksj_meta(metagen(x$value, x$se, rownames(x), method.tau = "DL"))
+    m = .hksj_meta(meta::metagen(x$value, x$se, rownames(x), method.tau = "DL"))
   } else if (method.var == "FE") {
-    m = metagen(x$value, x$se, rownames(x), method.tau = "FE")
+    m = meta::metagen(x$value, x$se, rownames(x), method.tau = "FE")
   } else {
-    m = metagen(x$value, x$se, rownames(x), method.tau = method.var)
+    m = meta::metagen(x$value, x$se, rownames(x), method.tau = method.var)
   }
   return(m)
 }
